@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>車險懶人包｜tony_insurance</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════
+     🎨 品牌色彩 — 在這裡統一修改顏色
+  ═══════════════════════════════════════ */
+  :root {
+    --bg:        #DFF0FA;   /* 頁面底色 */
+    --navy:      #0A2A5A;   /* 主標題深藍 */
+    --blue:      #0055CC;   /* 品牌藍 */
+    --orange:    #E07000;   /* 強調橘 */
+    --white:     #FFFFFF;
+    --gray:      #64748B;   /* 說明文字 */
+    --green:     #16A34A;
+    --red:       #CC2222;
+    --shadow:    0 2px 14px rgba(0,40,100,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+  /* ── 頂部橫條 ── */
+  .top-bar {
+    height: 6px;
+    background: linear-gradient(90deg, var(--orange) 0 35%, var(--blue) 35%);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 24px 28px;
+  }
+  .pill {
+    display: inline-block;
+    padding: 4px 14px;
+    border: 1.5px solid var(--blue);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--blue);
+    background: rgba(0,85,204,0.07);
+    margin-bottom: 18px;
+    letter-spacing: .05em;
+  }
+  /* ✏️ 修改主標題 */
+  .hero h1 {
+    font-size: clamp(32px, 9vw, 50px);
+    font-weight: 900;
+    line-height: 1.2;
+  }
+  .hero h1 .t1 { color: var(--navy); display: block; }
+  .hero h1 .t2 { color: var(--orange); display: block; }
+  .hero p {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--gray);
+    font-weight: 500;
+  }
+  .accent-line {
+    width: 48px; height: 4px;
+    background: var(--blue);
+    border-radius: 2px;
+    margin-top: 18px;
+  }
+
+  /* ── 險種卡片 ── */
+  .section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 16px 32px;
+  }
+
+  /* 險種標題列 */
+  .ins-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .ins-badge {
+    padding: 5px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--white);
+    white-space: nowrap;
+  }
+  .badge-must   { background: var(--red); }
+  .badge-rec    { background: var(--blue); }
+  .badge-opt    { background: var(--gray); }
+
+  .ins-title {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--navy);
+  }
+  .ins-sub {
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 500;
+    margin-top: 1px;
+  }
+
+  /* 內容卡片 */
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    display: flex;
+    gap: 14px;
+  }
+  .card-bar {
+    width: 4px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    align-self: stretch;
+    min-height: 36px;
+  }
+  .bar-blue   { background: var(--blue); }
+  .bar-orange { background: var(--orange); }
+  .bar-green  { background: var(--green); }
+  .bar-red    { background: var(--red); }
+  .bar-gray   { background: var(--gray); }
+
+  .card-body { flex: 1; }
+  .card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    opacity: .55;
+  }
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--navy);
+  }
+  .card-desc {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  /* tag chips */
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .tag {
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    background: rgba(0,85,204,0.08);
+    color: var(--blue);
+  }
+  .tag-warn { background: #FFF3E0; color: var(--orange); }
+  .tag-no   { background: #FFEAEA; color: var(--red); }
+
+  /* callout */
+  .callout {
+    border-radius: 10px;
+    padding: 13px 16px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.6;
+  }
+  .callout-blue   { background: rgba(0,85,204,0.07); border: 1.5px solid var(--blue); color: var(--blue); }
+  .callout-orange { background: #FFF8EC; border: 1.5px solid var(--orange); color: var(--orange); }
+  .callout-red    { background: #FFF0F0; border: 1.5px solid var(--red); color: var(--red); }
+
+  /* 分隔線 */
+  .sec-divider {
+    max-width: 680px;
+    margin: 0 auto 32px;
+    height: 1px;
+    background: rgba(0,85,204,0.1);
+  }
+
+  /* ── 總結比較表 ── */
+  .compare-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 16px 36px;
+  }
+  .compare-title {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--navy);
+    margin-bottom: 14px;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 13px;
+  }
+  .compare-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 700;
+  }
+  .compare-table td {
+    background: var(--white);
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(0,40,100,0.06);
+    vertical-align: middle;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .must-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--red);
+    color: var(--white);
+  }
+  .rec-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--blue);
+    color: var(--white);
+  }
+  .opt-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--gray);
+    color: var(--white);
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 16px 52px;
+    text-align: center;
+  }
+  .cta-box {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 30px 24px;
+    box-shadow: var(--shadow);
+  }
+  /* ✏️ 修改 CTA 標題 */
+  .cta-main {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1.35;
+    margin-bottom: 8px;
+  }
+  .cta-sub {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg);
+    border: 2px solid var(--blue);
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--blue);
+    text-decoration: none;
+  }
+
+  footer {
+    text-align: center;
+    padding: 16px;
+    font-size: 11px;
+    color: var(--gray);
+    opacity: .65;
+  }
+
+  /* fade-in */
+  .section, .compare-wrap, .cta-section { animation: fu .5s ease both; }
+  @keyframes fu { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+</style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<!-- ══ HERO ══════════════════════════════════════════ -->
+<!-- ✏️ 修改區：主標題、副標題 -->
+<div class="hero">
+  <div class="pill">車險懶人包</div>
+  <h1>
+    <span class="t1">買車險前</span>
+    <span class="t2">先搞懂這 4 種</span>
+  </h1>
+  <p>強制險、第三人責任險、車體損失險、竊盜險｜一次看懂保什麼</p>
+  <div class="accent-line"></div>
+</div>
+
+
+<!-- ══ 1. 強制險 ════════════════════════════════════ -->
+<!-- ✏️ 修改區：強制險內容 -->
+<div class="section">
+  <div class="ins-header">
+    <div class="ins-badge badge-must">必買</div>
+    <div>
+      <div class="ins-title">強制汽車責任險</div>
+      <div class="ins-sub">依法強制投保，不保就違法</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-bar bar-blue"></div>
+    <div class="card-body">
+      <div class="card-label">保障對象</div>
+      <div class="card-title">事故中的「受害第三人」</div>
+      <div class="card-desc">包含對方駕駛、乘客、行人。自己不在保障範圍內。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-bar bar-blue"></div>
+    <div class="card-body">
+      <div class="card-label">保障內容</div>
+      <div class="card-title">死亡最高 200 萬｜傷殘最高 200 萬｜醫療 20 萬</div>
+      <div class="card-desc">依傷殘等級分 15 級給付，不論肇事責任比例。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-bar bar-gray"></div>
+    <div class="card-body">
+      <div class="card-label">不保事項</div>
+      <div class="card-title">財物損失、自身傷亡、酒駕</div>
+      <div class="card-desc">對方車輛損壞不賠、自己受傷不賠、故意行為不賠。</div>
+      <div class="tags">
+        <span class="tag-no">財損 ✗</span>
+        <span class="tag-no">自身傷亡 ✗</span>
+        <span class="tag-no">酒駕 ✗</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-orange">
+    ⚠️ 強制險只是「底線保障」，上限不高，建議搭配第三人責任險補足缺口
+  </div>
+</div>
+
+<div class="sec-divider"></div>
+
+<!-- ══ 2. 第三人責任險 ════════════════════════════ -->
+<!-- ✏️ 修改區：第三人責任險內容 -->
+<div class="section">
+  <div class="ins-header">
+    <div class="ins-badge badge-rec">強烈建議</div>
+    <div>
+      <div class="ins-title">第三人責任險</div>
+      <div class="ins-sub">強制險的升級版，補足不足額的缺口</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-bar bar-blue"></div>
+    <div class="card-body">
+      <div class="card-label">保障對象</div>
+      <div class="card-title">事故中對方的人身與財物損失</div>
+      <div class="card-desc">強制險賠完不夠的部分，由第三人責任險繼續補賠。財損也包含在內。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-bar bar-green"></div>
+    <div class="card-body">
+      <div class="card-label">分為兩種</div>
+      <div class="card-title">傷亡責任險 ＋ 財損責任險</div>
+      <div class="card-desc">建議兩種都投保。傷亡責任險保人，財損責任險保車輛及財物損失。</div>
+      <div class="tags">
+        <span class="tag">傷亡責任</span>
+        <span class="tag">財損責任</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-bar bar-gray"></div>
+    <div class="card-body">
+      <div class="card-label">不保事項</div>
+      <div class="card-title">自己的傷亡與車損不賠</div>
+      <div class="card-desc">第三人責任險保的是「對方」，自己車輛損失需靠車體損失險。</div>
+    </div>
+  </div>
+
+  <div class="callout callout-blue">
+    💡 建議保額：傷亡每人 300 萬以上，財損 50 萬以上，保費差不多但安全感差很多
+  </div>
+</div>
+
+<div class="sec-divider"></div>
+
+<!-- ══ 3. 車體損失險 ══════════════════════════════ -->
+<!-- ✏️ 修改區：車體損失險內容 -->
+<div class="section">
+  <div class="ins-header">
+    <div class="ins-badge badge-rec">視需求</div>
+    <div>
+      <div class="ins-title">車體損失險</div>
+      <div class="ins-sub">甲式 / 乙式 / 丙式，差很多</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-bar bar-blue"></div>
+    <div class="card-body">
+      <div class="card-label">甲式｜最完整</div>
+      <div class="card-title">幾乎所有原因造成的車損都賠</div>
+      <div class="card-desc">包含碰撞、火災、颱風、洪水、地震、惡意破壞。保費最貴，新車建議選。</div>
+      <div class="tags">
+        <span class="tag">碰撞 ✓</span>
+        <span class="tag">颱風 ✓</span>
+        <span class="tag">第三人惡意 ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-bar bar-orange"></div>
+    <div class="card-body">
+      <div class="card-label">乙式｜中等</div>
+      <div class="card-title">碰撞、火災、颱風等，但不保惡意破壞</div>
+      <div class="card-desc">比甲式便宜，不保「第三人非善意行為」，價格居中。</div>
+      <div class="tags">
+        <span class="tag">碰撞 ✓</span>
+        <span class="tag">颱風 ✓</span>
+        <span class="tag-no">第三人惡意 ✗</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-bar bar-gray"></div>
+    <div class="card-body">
+      <div class="card-label">丙式｜最基本</div>
+      <div class="card-title">只保「兩車碰撞」，其他全不賠</div>
+      <div class="card-desc">保費最低，但保障最窄。獨自擦撞路邊、颱風損壞均不賠。舊車或預算有限者才考慮。</div>
+      <div class="tags">
+        <span class="tag">兩車碰撞 ✓</span>
+        <span class="tag-no">颱風 ✗</span>
+        <span class="tag-no">自撞 ✗</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-orange">
+    💡 搞懂甲乙丙，才知道自己買的值不值
+  </div>
+</div>
+
+<div class="sec-divider"></div>
+
+<!-- ══ 4. 竊盜險 ══════════════════════════════════ -->
+<!-- ✏️ 修改區：竊盜險內容 -->
+<div class="section">
+  <div class="ins-header">
+    <div class="ins-badge badge-opt">選配</div>
+    <div>
+      <div class="ins-title">竊盜險</div>
+      <div class="ins-sub">保車被偷，不保車裡的東西</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-bar bar-green"></div>
+    <div class="card-body">
+      <div class="card-label">賠什麼</div>
+      <div class="card-title">整台車被偷走</div>
+      <div class="card-desc">協尋 30 天後未尋回，以市值計算理賠。加附加條款可涵蓋零件竊盜。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-bar bar-red"></div>
+    <div class="card-body">
+      <div class="card-label">不賠什麼</div>
+      <div class="card-title">車內財物、自家人偷走</div>
+      <div class="card-desc">包包、筆電等車內物品完全不賠。家人拿走不算竊盜，保險公司不理賠。</div>
+      <div class="tags">
+        <span class="tag-no">車內財物 ✗</span>
+        <span class="tag-no">自家人 ✗</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-red">
+    ⚠️ 車不見第一步是報警，不是打給保險公司。拖太久視為放棄理賠。
+  </div>
+</div>
+
+<div class="sec-divider"></div>
+
+<!-- ══ 總結比較表 ══════════════════════════════════ -->
+<!-- ✏️ 修改區：比較表數值 -->
+<div class="compare-wrap">
+  <div class="compare-title">四種險種一表比較</div>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>險種</th>
+        <th>保障對象</th>
+        <th>財損</th>
+        <th>建議</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>強制險</strong></td>
+        <td>對方人身</td>
+        <td>❌</td>
+        <td><span class="must-tag">必買</span></td>
+      </tr>
+      <tr>
+        <td><strong>第三人責任</strong></td>
+        <td>對方人身 + 財物</td>
+        <td>✅</td>
+        <td><span class="rec-tag">強烈建議</span></td>
+      </tr>
+      <tr>
+        <td><strong>車體損失</strong></td>
+        <td>自己的車</td>
+        <td>✅</td>
+        <td><span class="rec-tag">視車況</span></td>
+      </tr>
+      <tr>
+        <td><strong>竊盜險</strong></td>
+        <td>整車失竊</td>
+        <td>❌</td>
+        <td><span class="opt-tag">選配</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══ CTA ════════════════════════════════════════ -->
+<!-- ✏️ 修改區：CTA 文字與連結 -->
+<div class="cta-section">
+  <div class="cta-box">
+    <div class="cta-main">買對保險<br>不是靠運氣</div>
+    <div class="cta-sub">
+      看完有疑問？直接私訊我<br>
+      不買沒關係，先搞懂再說 🔑
+    </div>
+    <a class="cta-btn" href="https://www.instagram.com/tony_insurance" target="_blank">
+      📩 @tony_insurance
+    </a>
+  </div>
+</div>
+
+<footer>Tony｜你身邊懂保險的朋友 @tony_insurance</footer>
+
+</body>
+</html>
