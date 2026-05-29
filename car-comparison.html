@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>車體損失險｜甲乙丙式比較表</title>
+  <style>
+    :root {
+      --indigo: #4F46E5;
+      --green:  #059669;
+      --amber:  #B45309;
+      --red:    #DC2626;
+      --gray:   #6B7280;
+      --border: #E5E7EB;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif;
+      background: #F3F4F6;
+      color: #111827;
+      padding: 32px 16px 64px;
+    }
+
+    /* ── 頁首 ── */
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .header .tag {
+      display: inline-block;
+      background: #EEF2FF;
+      color: var(--indigo);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .header p {
+      margin-top: 10px;
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    /* ── 方案卡片 ── */
+    .plans-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 860px;
+      margin: 0 auto 28px;
+    }
+    .plan-card {
+      border-radius: 16px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .plan-card.jia { background: linear-gradient(135deg, #EEF2FF, #C7D2FE); border: 2px solid #818CF8; }
+    .plan-card.yi  { background: linear-gradient(135deg, #F0FDF4, #A7F3D0); border: 2px solid #34D399; }
+    .plan-card.bing{ background: linear-gradient(135deg, #FFFBEB, #FDE68A); border: 2px solid #FCD34D; }
+    .plan-card .badge { font-size: 26px; font-weight: 900; margin-bottom: 4px; }
+    .plan-card.jia .badge { color: var(--indigo); }
+    .plan-card.yi  .badge { color: var(--green); }
+    .plan-card.bing .badge { color: var(--amber); }
+    .plan-card h2 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .plan-card .fee {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+    .plan-card.jia .fee { background: #818CF8; color: #fff; }
+    .plan-card.yi  .fee { background: #34D399; color: #fff; }
+    .plan-card.bing .fee { background: #F59E0B; color: #fff; }
+    .plan-card .desc {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    /* ── 比較表 ── */
+    .table-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    }
+    table { width: 100%; border-collapse: collapse; }
+
+    thead tr { background: #1E1B4B; }
+    thead th {
+      padding: 14px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+    }
+    thead th:first-child { text-align: left; padding-left: 20px; width: 42%; }
+
+    /* 欄標題色條 */
+    .col-jia { background: rgba(129,140,248,.15); }
+    .col-yi  { background: rgba(52,211,153,.15); }
+    .col-bing{ background: rgba(245,158,11,.12); }
+
+    tbody tr { border-bottom: 1px solid var(--border); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #FAFAFA; }
+
+    .section-head td {
+      background: #F1F5F9;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: #475569;
+      padding: 7px 20px;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 12px 10px;
+      font-size: 13.5px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    td:first-child {
+      text-align: left;
+      padding-left: 20px;
+      font-weight: 500;
+      color: #374151;
+      font-size: 13px;
+    }
+    td sub { font-size: 11px; color: #9CA3AF; display: block; margin-top: 2px; font-weight: 400; }
+
+    .yes   { color: #059669; font-size: 20px; font-weight: 800; line-height: 1; }
+    .no    { color: #DC2626; font-size: 20px; font-weight: 800; line-height: 1; }
+    .addon {
+      display: inline-block;
+      background: #FEF3C7;
+      color: #92400E;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+    .sep {
+      display: inline-block;
+      background: #E0E7FF;
+      color: #3730A3;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .pill-high { background: #FEE2E2; color: #B91C1C; }
+    .pill-mid  { background: #FEF3C7; color: #92400E; }
+    .pill-low  { background: #D1FAE5; color: #065F46; }
+
+    /* ── 誰適合 ── */
+    .who-section {
+      max-width: 860px;
+      margin: 24px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .who-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 18px 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
+    .who-card h3 { font-size: 13.5px; font-weight: 800; margin-bottom: 10px; }
+    .who-card.jia h3 { color: var(--indigo); }
+    .who-card.yi  h3 { color: var(--green); }
+    .who-card.bing h3 { color: var(--amber); }
+    .who-card ul { padding-left: 16px; }
+    .who-card li { font-size: 12.5px; color: #374151; line-height: 1.9; }
+
+    /* ── 核心差異說明 ── */
+    .diff-box {
+      max-width: 860px;
+      margin: 24px auto 0;
+      background: #EEF2FF;
+      border: 1px solid #C7D2FE;
+      border-radius: 14px;
+      padding: 16px 20px;
+    }
+    .diff-box h4 { font-size: 13px; font-weight: 800; color: var(--indigo); margin-bottom: 10px; }
+    .diff-box ul { padding-left: 18px; }
+    .diff-box li { font-size: 13px; color: #374151; line-height: 1.9; }
+    .diff-box strong { color: #1E1B4B; }
+
+    /* ── 備注 ── */
+    .notice {
+      max-width: 860px;
+      margin: 16px auto 0;
+      background: #FFF7ED;
+      border: 1px solid #FDE68A;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 12.5px;
+      color: #92400E;
+      line-height: 1.8;
+    }
+    .notice strong { color: #B45309; }
+
+    footer {
+      text-align: center;
+      margin-top: 36px;
+      font-size: 12px;
+      color: #9CA3AF;
+    }
+    footer a { color: var(--indigo); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .plans-row, .who-section { grid-template-columns: 1fr; }
+      td, thead th { padding: 10px 6px; font-size: 12px; }
+      td:first-child { padding-left: 12px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="tag">產險｜車體損失險</div>
+    <h1>甲式 vs 乙式 vs 丙式<br>一表搞懂差在哪</h1>
+    <p>保費差很多，保的範圍也差很多 — 選對才不虧</p>
+  </div>
+
+  <!-- 方案卡片 -->
+  <div class="plans-row">
+    <div class="plan-card jia">
+      <div class="badge">甲式</div>
+      <h2>全保障</h2>
+      <span class="fee">保費最高</span>
+      <p class="desc">最大保障，連不明刮傷、<br>肇事逃逸都能理賠</p>
+    </div>
+    <div class="plan-card yi">
+      <div class="badge">乙式</div>
+      <h2>主流選擇</h2>
+      <span class="fee">保費中等</span>
+      <p class="desc">自撞、他撞都保，<br>CP 值最高的方案</p>
+    </div>
+    <div class="plan-card bing">
+      <div class="badge">丙式</div>
+      <h2>車碰車才賠</h2>
+      <span class="fee">保費最低</span>
+      <p class="desc">只保「車對車碰撞」，<br>保費最便宜最基本</p>
+    </div>
+  </div>
+
+  <!-- 比較表 -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>承保事故</th>
+          <th class="col-jia">甲式</th>
+          <th class="col-yi">乙式</th>
+          <th class="col-bing">丙式</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- 碰撞 -->
+        <tr class="section-head"><td colspan="4">碰撞事故</td></tr>
+        <tr>
+          <td>車對車碰撞、擦撞<sub>（含對方肇逃，需有證據確認對方為車輛）</sub></td>
+          <td class="col-jia"><span class="yes">✓</span></td>
+          <td class="col-yi"><span class="yes">✓</span></td>
+          <td class="col-bing"><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>車對物碰撞、車輛傾覆<sub>（自撞護欄、路樹、電線桿、倒車撞牆等）</sub></td>
+          <td class="col-jia"><span class="yes">✓</span></td>
+          <td class="col-yi"><span class="yes">✓</span></td>
+          <td class="col-bing"><span class="no">✗</span></td>
+        </tr>
+
+        <!-- 外力 -->
+        <tr class="section-head"><td colspan="4">外力損失</td></tr>
+        <tr>
+          <td>火災、爆炸</td>
+          <td class="col-jia"><span class="yes">✓</span></td>
+          <td class="col-yi"><span class="yes">✓</span></td>
+          <td class="col-bing"><span class="no">✗</span></td>
+        </tr>
+        <tr>
+          <td>閃電、拋擲物、墜落物砸損</td>
+          <td class="col-jia"><span class="yes">✓</span></td>
+          <td class="col-yi"><span class="yes">✓</span></td>
+          <td class="col-bing"><span class="no">✗</span></td>
+        </tr>
+        <tr>
+          <td>第三人非善意行為<sub>（惡意刮漆、蓄意破壞）</sub></td>
+          <td class="col-jia"><span class="yes">✓</span></td>
+          <td class="col-yi"><span class="no">✗</span></td>
+          <td class="col-bing"><span class="no">✗</span></td>
+        </tr>
+        <tr>
+          <td>不明原因損失<sub>（停車場被不明車輛刮傷、肇事逃逸無法確認對方）</sub></td>
+          <td class="col-jia"><span class="yes">✓</span></td>
+          <td class="col-yi"><span class="no">✗</span></td>
+          <td class="col-bing"><span class="no">✗</span></td>
+        </tr>
+
+        <!-- 附加 -->
+        <tr class="section-head"><td colspan="4">需另外加保（非基本承保範圍）</td></tr>
+        <tr>
+          <td>颱風、洪水、地震、海嘯、冰雹<sub>（需加保「天災附加條款」）</sub></td>
+          <td class="col-jia"><span class="addon">可附加</span></td>
+          <td class="col-yi"><span class="addon">可附加</span></td>
+          <td class="col-bing"><span class="no">✗</span></td>
+        </tr>
+        <tr>
+          <td>整車遭竊<sub>（需另外加保「竊盜損失險」）</sub></td>
+          <td class="col-jia"><span class="sep">另外險種</span></td>
+          <td class="col-yi"><span class="sep">另外險種</span></td>
+          <td class="col-bing"><span class="sep">另外險種</span></td>
+        </tr>
+
+        <!-- 費率 -->
+        <tr class="section-head"><td colspan="4">費率參考</td></tr>
+        <tr>
+          <td>相對保費水準</td>
+          <td class="col-jia"><span class="pill pill-high">最高</span></td>
+          <td class="col-yi"><span class="pill pill-mid">中等</span></td>
+          <td class="col-bing"><span class="pill pill-low">最低</span></td>
+        </tr>
+        <tr>
+          <td>建議車齡</td>
+          <td class="col-jia" style="font-size:12px;color:#374151;">新車 / 進口高價車</td>
+          <td class="col-yi" style="font-size:12px;color:#374151;">5 年內中等車</td>
+          <td class="col-bing" style="font-size:12px;color:#374151;">5 年以上 / 代步舊車</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 核心差異說明 -->
+  <div class="diff-box">
+    <h4>甲式 vs 乙式，差在這兩點</h4>
+    <ul>
+      <li><strong>第三人非善意行為</strong>：停在路邊被人惡意刮傷、敲壞，乙式不賠，只有甲式賠</li>
+      <li><strong>不明原因損失</strong>：停車場被不明車輛刮傷、肇事逃逸無法確認對方是誰，乙式不賠，只有甲式賠</li>
+    </ul>
+  </div>
+
+  <!-- 誰適合 -->
+  <div class="who-section">
+    <div class="who-card jia">
+      <h3>甲式適合誰？</h3>
+      <ul>
+        <li>新車或進口高價車</li>
+        <li>停路邊、環境複雜</li>
+        <li>新手、出險風險高</li>
+        <li>想要「全保」的安心感</li>
+      </ul>
+    </div>
+    <div class="who-card yi">
+      <h3>乙式適合誰？</h3>
+      <ul>
+        <li>5 年內中等車齡</li>
+        <li>自撞機率不算低</li>
+        <li>住颱風、大雨高風險區</li>
+        <li>預算有限但想有基本車損保障</li>
+      </ul>
+    </div>
+    <div class="who-card bing">
+      <h3>丙式適合誰？</h3>
+      <ul>
+        <li>車齡 5 年以上 / 中古代步車</li>
+        <li>固定停車位，停車環境單純</li>
+        <li>開車穩、不擔心自撞</li>
+        <li>保費預算有限</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 備注 -->
+  <div class="notice">
+    <strong>⚠ 注意事項</strong><br>
+    ① 天災（颱風、地震、洪水等）三式均非基本承保範圍，需另外加保「天災附加條款」。<br>
+    ② 竊盜損失需另外投保「汽車竊盜損失險」，非車體險涵蓋範圍。<br>
+    ③ 丙式限額車體險（部分公司稱丁式）保額依約定金額（如 5/10/20 萬）為上限，保費比一般丙式更低。<br>
+    ④ 各家保險公司條款細節略有差異，實際理賠以投保保單條款為準。
+  </div>
+
+  <footer>
+    <p>by <a href="https://www.instagram.com/tony.insurance" target="_blank">@tony.insurance</a>｜保險疑問歡迎私訊</p>
+  </footer>
+
+</body>
+</html>
