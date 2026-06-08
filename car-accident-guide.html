@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>車禍正確處理流程｜懶人包</title>
+  <style>
+    :root {
+      --red:    #DC2626;
+      --orange: #EA580C;
+      --blue:   #2563EB;
+      --indigo: #4F46E5;
+      --green:  #059669;
+      --gray:   #6B7280;
+      --border: #E5E7EB;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif;
+      background: #F3F4F6;
+      color: #111827;
+      padding: 32px 16px 64px;
+    }
+
+    /* ── 頁首 ── */
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .header .tag {
+      display: inline-block;
+      background: #FEE2E2;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .header p {
+      margin-top: 10px;
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    /* ── 緊急提醒框 ── */
+    .alert-box {
+      max-width: 680px;
+      margin: 0 auto 32px;
+      background: #FEF2F2;
+      border: 2px solid #FCA5A5;
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .alert-box .icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .alert-box h3 { font-size: 14px; font-weight: 800; color: var(--red); margin-bottom: 6px; }
+    .alert-box p { font-size: 13px; color: #7F1D1D; line-height: 1.7; }
+
+    /* ── 步驟區塊 ── */
+    .section-title {
+      max-width: 680px;
+      margin: 0 auto 16px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
+
+    .steps {
+      max-width: 680px;
+      margin: 0 auto 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .step-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 18px 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      border-left: 4px solid transparent;
+    }
+    .step-card.s1 { border-left-color: #EF4444; }
+    .step-card.s2 { border-left-color: #F97316; }
+    .step-card.s3 { border-left-color: #EAB308; }
+    .step-card.s4 { border-left-color: #22C55E; }
+    .step-card.s5 { border-left-color: #3B82F6; }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 15px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #fff;
+    }
+    .s1 .step-num { background: #EF4444; }
+    .s2 .step-num { background: #F97316; }
+    .s3 .step-num { background: #EAB308; }
+    .s4 .step-num { background: #22C55E; }
+    .s5 .step-num { background: #3B82F6; }
+
+    .step-body h3 { font-size: 15px; font-weight: 800; margin-bottom: 6px; }
+    .step-body p  { font-size: 13px; color: #374151; line-height: 1.7; }
+    .step-body ul { padding-left: 16px; margin-top: 6px; }
+    .step-body li { font-size: 13px; color: #374151; line-height: 1.9; }
+    .step-body .note {
+      margin-top: 8px;
+      background: #F9FAFB;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #6B7280;
+      line-height: 1.6;
+    }
+
+    /* ── 3個錯誤 ── */
+    .mistakes {
+      max-width: 680px;
+      margin: 0 auto 32px;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    }
+    .mistakes-header {
+      background: #7F1D1D;
+      padding: 14px 20px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .mistake-item {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .mistake-item:last-child { border-bottom: none; }
+    .mistake-item .x-icon {
+      width: 28px; height: 28px;
+      background: #FEE2E2;
+      color: var(--red);
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .mistake-item h4 { font-size: 14px; font-weight: 700; color: #111; margin-bottom: 4px; }
+    .mistake-item p  { font-size: 12.5px; color: #6B7280; line-height: 1.6; }
+
+    /* ── 強制險申請 ── */
+    .claim-box {
+      max-width: 680px;
+      margin: 0 auto 32px;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    }
+    .claim-header {
+      background: #1E40AF;
+      padding: 14px 20px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .claim-body { padding: 20px; }
+    .claim-body h4 { font-size: 13px; font-weight: 700; color: #1E40AF; margin-bottom: 8px; }
+    .claim-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .claim-tag {
+      background: #EFF6FF;
+      color: #1E40AF;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 99px;
+    }
+    .claim-info {
+      background: #F8FAFC;
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+    .claim-info p {
+      font-size: 12.5px;
+      color: #374151;
+      line-height: 1.8;
+    }
+    .claim-info strong { color: #1E40AF; }
+
+    /* ── 特別補償基金 ── */
+    .fund-box {
+      max-width: 680px;
+      margin: 0 auto 32px;
+      background: #F0FDF4;
+      border: 1.5px solid #86EFAC;
+      border-radius: 16px;
+      padding: 18px 20px;
+    }
+    .fund-box h3 { font-size: 14px; font-weight: 800; color: #166534; margin-bottom: 10px; }
+    .fund-box ul { padding-left: 18px; }
+    .fund-box li { font-size: 13px; color: #166534; line-height: 1.9; }
+    .fund-box .hotline {
+      margin-top: 12px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 13px;
+      color: #166534;
+      font-weight: 600;
+    }
+
+    /* ── 備注 ── */
+    .notice {
+      max-width: 680px;
+      margin: 0 auto 0;
+      background: #FFF7ED;
+      border: 1px solid #FDE68A;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 12.5px;
+      color: #92400E;
+      line-height: 1.8;
+    }
+    .notice strong { color: #B45309; }
+
+    footer {
+      text-align: center;
+      margin-top: 36px;
+      font-size: 12px;
+      color: #9CA3AF;
+    }
+    footer a { color: var(--indigo); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .step-card { padding: 14px 16px; gap: 12px; }
+      .step-num { width: 30px; height: 30px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頁首 -->
+  <div class="header">
+    <div class="tag">車禍處理｜完整流程</div>
+    <h1>出了車禍，這樣做<br>保障才不會打折</h1>
+    <p>從現場處理到申請理賠，一步一步帶你走</p>
+  </div>
+
+  <!-- 緊急提醒 -->
+  <div class="alert-box">
+    <div class="icon">🚨</div>
+    <div>
+      <h3>車禍當下第一件事</h3>
+      <p>確認傷亡 → 撥打 119（有傷者）→ 撥打 110 報警<br>
+      <strong>不論大小事故，一定要報警取得事故三聯單</strong>，後續申請強制險和特別補償基金都需要這份文件。</p>
+    </div>
+  </div>
+
+  <!-- 現場處理步驟 -->
+  <div class="section-title" style="max-width:680px;margin:0 auto 16px;">現場處理步驟</div>
+  <div class="steps">
+
+    <div class="step-card s1">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>確認傷亡，撥打 119 / 110</h3>
+        <p>有人受傷先叫救護車，接著報警。記得索取<strong>道路交通事故三聯單</strong>，這是後續申請保險的重要文件。</p>
+      </div>
+    </div>
+
+    <div class="step-card s2">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>移車前先拍照，全方位記錄現場</h3>
+        <p>台灣路窄，很多人第一反應就移車——但現場一動，責任比例就很難認定。</p>
+        <ul>
+          <li>雙方車輛的相對位置</li>
+          <li>各角度的車損情況</li>
+          <li>對方車牌號碼</li>
+          <li>路口監視器位置（記下來）</li>
+        </ul>
+        <div class="note">拍完再移車，確認周圍安全後放置警示三角架。</div>
+      </div>
+    </div>
+
+    <div class="step-card s3">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>不要私下和解，等警察到場</h3>
+        <p>對方說「我們自己處理就好」——直接拒絕。</p>
+        <ul>
+          <li>沒有三聯單，後續申請強制險被認定文件不齊</li>
+          <li>對方事後反悔，可以說你肇事逃逸</li>
+          <li>一個私下和解，可能變成刑事案件</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-card s4">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>就醫後保留所有收據</h3>
+        <p>以下費用都可以向對方的強制險申請回來：</p>
+        <ul>
+          <li>掛號費、診察費</li>
+          <li>診斷書費</li>
+          <li>自費醫材、藥品費</li>
+          <li>必要的交通費（往返就醫）</li>
+        </ul>
+        <div class="note">⚠ 很多人不知道這個權利，收據一定要留好。</div>
+      </div>
+    </div>
+
+    <div class="step-card s5">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h3>申請強制險理賠</h3>
+        <p>攜帶以下文件，直接找對方投保的產險公司申請，不需要對方同意。</p>
+        <ul>
+          <li>事故三聯單（向警方申請）</li>
+          <li>診斷書、醫療收據</li>
+          <li>身分證、匯款帳號</li>
+        </ul>
+        <div class="note">申請期限：損害發生起 <strong>2 年內</strong>。保險公司收到完整文件後 10 個工作日內給付。</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 3個錯誤 -->
+  <div class="section-title">這 3 個錯誤，很多人事後才後悔</div>
+  <div class="mistakes">
+    <div class="mistakes-header">❌ 車禍現場常見 3 大錯誤</div>
+    <div class="mistake-item">
+      <div class="x-icon">✗</div>
+      <div>
+        <h4>私下和解、沒有報警</h4>
+        <p>少了事故三聯單，強制險申請文件不齊；對方反悔還能告你肇事逃逸，可能變刑事案件。</p>
+      </div>
+    </div>
+    <div class="mistake-item">
+      <div class="x-icon">✗</div>
+      <div>
+        <h4>沒拍照就把車移開</h4>
+        <p>現場一動，責任比例就難認定。移車前務必完整拍下現場、車損、車牌、雙方位置。</p>
+      </div>
+    </div>
+    <div class="mistake-item">
+      <div class="x-icon">✗</div>
+      <div>
+        <h4>有看診但不知道申請強制險</h4>
+        <p>掛號費、診斷書費、自費醫材全都可以申請回來，很多人就這樣白白放棄了自己的權利。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 強制險說明 -->
+  <div class="section-title">強制險｜你能拿到多少？</div>
+  <div class="claim-box">
+    <div class="claim-header">💰 強制險給付上限（2026/07/01 起新制）</div>
+    <div class="claim-body">
+      <h4>傷害醫療費用（可申請項目）</h4>
+      <div class="claim-list">
+        <span class="claim-tag">掛號費</span>
+        <span class="claim-tag">診察費</span>
+        <span class="claim-tag">診斷書費</span>
+        <span class="claim-tag">手術費</span>
+        <span class="claim-tag">住院費</span>
+        <span class="claim-tag">自費醫材</span>
+        <span class="claim-tag">必要交通費</span>
+      </div>
+      <div class="claim-info">
+        <p>
+          ▸ 傷害醫療費用上限：<strong>每人最高 20 萬元</strong><br>
+          ▸ 失能給付（15 等級）：最高 <strong>300 萬元</strong>（新制）<br>
+          ▸ 死亡給付：每人 <strong>300 萬元</strong>（新制，7/1 起）<br>
+          ▸ 申請方式：直接找對方投保的產險公司，<strong>不需要對方同意</strong><br>
+          ▸ 申請期限：損害發生起 <strong>2 年內</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 特別補償基金 -->
+  <div class="fund-box">
+    <h3>🛡 對方肇事逃逸或沒保強制險？→ 申請特別補償基金</h3>
+    <ul>
+      <li>肇事逃逸，找不到對方</li>
+      <li>對方未投保強制險</li>
+      <li>失竊車輛肇事</li>
+    </ul>
+    <p style="font-size:13px;color:#166534;margin-top:10px;line-height:1.7;">
+      補償上限與強制險相同（傷害醫療最高 20 萬）。<br>
+      <strong>申請方式：到任一家產險公司辦理，不用自己找基金會。</strong>
+    </p>
+  </div>
+
+  <!-- 備注 -->
+  <div class="notice">
+    <strong>⚠ 注意事項</strong><br>
+    ① 強制險只保「人身傷亡」，不保車輛財物損失，車輛損失須由第三人責任險或車體險處理。<br>
+    ② 2026/07/01 起死亡及第一等級失能給付由 200 萬調升為 300 萬，醫療上限 20 萬維持不變。<br>
+    ③ 本頁內容為一般保險知識說明，不構成要約或保險建議，實際理賠依各保單條款為準。
+  </div>
+
+  <footer>
+    <p>製作人：陳彤｜<a href="https://www.instagram.com/tony.insurance" target="_blank">@tony.insurance</a>｜保險疑問歡迎私訊</p>
+    <p style="margin-top:6px;">所屬公司：【請填入您的保險經紀人公司名稱】</p>
+  </footer>
+
+</body>
+</html>
