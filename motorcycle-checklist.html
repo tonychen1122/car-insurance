@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>機車族必補保障清單｜強制險的 3 個缺口</title>
+  <style>
+    :root {
+      --indigo: #4F46E5;
+      --green:  #059669;
+      --amber:  #B45309;
+      --red:    #DC2626;
+      --rose:   #E11D48;
+      --gray:   #6B7280;
+      --border: #E5E7EB;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif;
+      background: #F3F4F6;
+      color: #111827;
+      padding: 32px 16px 64px;
+    }
+
+    /* ── 頁首 ── */
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .header .tag {
+      display: inline-block;
+      background: #FFF1F2;
+      color: var(--rose);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .header p {
+      margin-top: 10px;
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    /* ── 章節標題 ── */
+    .section-title {
+      max-width: 860px;
+      margin: 0 auto 16px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      color: #374151;
+      text-transform: uppercase;
+    }
+
+    /* ── 缺口卡片 ── */
+    .gap-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 860px;
+      margin: 0 auto 36px;
+    }
+    .gap-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      border-top: 4px solid;
+    }
+    .gap-card.g1 { border-color: #F87171; }
+    .gap-card.g2 { border-color: #FB923C; }
+    .gap-card.g3 { border-color: #FBBF24; }
+    .gap-number {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      margin-bottom: 6px;
+    }
+    .gap-card.g1 .gap-number { color: #EF4444; }
+    .gap-card.g2 .gap-number { color: #F97316; }
+    .gap-card.g3 .gap-number { color: #F59E0B; }
+    .gap-card h3 {
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin-bottom: 8px;
+      color: #111827;
+    }
+    .gap-card p {
+      font-size: 12.5px;
+      color: #6B7280;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .fix-badge {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+    .gap-card.g1 .fix-badge { background: #FEE2E2; color: #B91C1C; }
+    .gap-card.g2 .fix-badge { background: #FFEDD5; color: #C2410C; }
+    .gap-card.g3 .fix-badge { background: #FEF3C7; color: #92400E; }
+
+    /* ── 保險詳解卡片 ── */
+    .coverage-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      max-width: 860px;
+      margin: 0 auto 28px;
+    }
+    .cov-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
+    .cov-card .cov-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .cov-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .cov-card.c1 .cov-icon { background: #EEF2FF; }
+    .cov-card.c2 .cov-icon { background: #F0FDF4; }
+    .cov-card.c3 .cov-icon { background: #FFF7ED; }
+    .cov-card.c4 .cov-icon { background: #FFF1F2; }
+    .cov-name { font-size: 15px; font-weight: 800; }
+    .cov-card.c1 .cov-name { color: var(--indigo); }
+    .cov-card.c2 .cov-name { color: var(--green); }
+    .cov-card.c3 .cov-name { color: var(--amber); }
+    .cov-card.c4 .cov-name { color: var(--rose); }
+    .cov-sub { font-size: 11.5px; color: #9CA3AF; margin-top: 1px; }
+
+    .cov-what {
+      font-size: 12.5px;
+      color: #374151;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+    .cov-list {
+      list-style: none;
+      padding: 0;
+    }
+    .cov-list li {
+      font-size: 12.5px;
+      color: #374151;
+      line-height: 1.7;
+      padding: 6px 0;
+      border-bottom: 1px solid #F3F4F6;
+      display: flex;
+      gap: 8px;
+    }
+    .cov-list li:last-child { border-bottom: none; }
+    .cov-list .icon-yes { color: #059669; font-weight: 700; flex-shrink: 0; }
+    .cov-list .icon-no  { color: #DC2626; font-weight: 700; flex-shrink: 0; }
+
+    /* ── 總覽比較表 ── */
+    .table-wrap {
+      max-width: 860px;
+      margin: 0 auto 28px;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    }
+    table { width: 100%; border-collapse: collapse; }
+
+    thead tr { background: #1E1B4B; }
+    thead th {
+      padding: 14px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+    }
+    thead th:first-child { text-align: left; padding-left: 20px; width: 28%; }
+
+    tbody tr { border-bottom: 1px solid var(--border); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #FAFAFA; }
+
+    .section-head td {
+      background: #F1F5F9;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: #475569;
+      padding: 7px 20px;
+    }
+
+    td {
+      padding: 12px 10px;
+      font-size: 13px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    td:first-child {
+      text-align: left;
+      padding-left: 20px;
+      font-weight: 500;
+      color: #374151;
+      font-size: 12.5px;
+    }
+    td sub { font-size: 11px; color: #9CA3AF; display: block; margin-top: 2px; font-weight: 400; }
+
+    .yes   { color: #059669; font-size: 18px; font-weight: 800; }
+    .no    { color: #DC2626; font-size: 18px; font-weight: 800; }
+    .partial {
+      display: inline-block;
+      background: #FEF3C7;
+      color: #92400E;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+    .must {
+      display: inline-block;
+      background: #FEE2E2;
+      color: #B91C1C;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+    .opt {
+      display: inline-block;
+      background: #D1FAE5;
+      color: #065F46;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    .col-mandatory { background: rgba(220,38,38,.05); }
+    .col-driver    { background: rgba(79,70,229,.05); }
+    .col-tpl       { background: rgba(5,150,105,.05); }
+    .col-medical   { background: rgba(180,83,9,.05); }
+    .col-accident  { background: rgba(225,29,72,.05); }
+
+    /* ── 建議組合 ── */
+    .combo-box {
+      max-width: 860px;
+      margin: 0 auto 28px;
+      background: #EEF2FF;
+      border: 1px solid #C7D2FE;
+      border-radius: 14px;
+      padding: 20px 24px;
+    }
+    .combo-box h4 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--indigo);
+      margin-bottom: 14px;
+    }
+    .combo-flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .combo-item {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      background: #fff;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(79,70,229,.12);
+      min-width: 90px;
+      text-align: center;
+    }
+    .combo-item .ci-label { font-size: 10px; color: #9CA3AF; font-weight: 400; margin-top: 2px; }
+    .combo-item.mandatory { color: #B91C1C; border: 1.5px solid #FCA5A5; }
+    .combo-item.recommend { color: var(--indigo); border: 1.5px solid #A5B4FC; }
+    .combo-plus {
+      font-size: 20px;
+      color: #9CA3AF;
+      font-weight: 300;
+    }
+    .combo-note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #374151;
+      line-height: 1.8;
+    }
+
+    /* ── CTA ── */
+    .cta-box {
+      max-width: 860px;
+      margin: 0 auto 28px;
+      background: linear-gradient(135deg, #1E1B4B, #312E81);
+      border-radius: 20px;
+      padding: 28px 24px;
+      text-align: center;
+      color: #fff;
+    }
+    .cta-box h3 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .cta-box p {
+      font-size: 13.5px;
+      color: #C7D2FE;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+    .cta-keyword {
+      display: inline-block;
+      background: #fff;
+      color: #1E1B4B;
+      font-size: 15px;
+      font-weight: 800;
+      padding: 10px 28px;
+      border-radius: 99px;
+      letter-spacing: .05em;
+    }
+    .cta-sub {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #A5B4FC;
+    }
+
+    /* ── 備注 ── */
+    .notice {
+      max-width: 860px;
+      margin: 0 auto 0;
+      background: #FFF7ED;
+      border: 1px solid #FDE68A;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 12.5px;
+      color: #92400E;
+      line-height: 1.8;
+    }
+    .notice strong { color: #B45309; }
+
+    footer {
+      text-align: center;
+      margin-top: 36px;
+      font-size: 12px;
+      color: #9CA3AF;
+    }
+    footer a { color: var(--indigo); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .gap-row, .coverage-row { grid-template-columns: 1fr; }
+      td, thead th { padding: 10px 6px; font-size: 11.5px; }
+      td:first-child { padding-left: 12px; font-size: 11.5px; }
+      .combo-flow { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="tag">機車族｜保障缺口</div>
+    <h1>強制險只是底線<br>這 4 個保障你才真的有保到</h1>
+    <p>很多機車族有保險，但出事才發現根本不夠用</p>
+  </div>
+
+  <!-- 3 大缺口 -->
+  <div class="section-title" style="max-width:860px;margin:0 auto 16px;">三個強制險保不到的缺口</div>
+  <div class="gap-row">
+    <div class="gap-card g1">
+      <div class="gap-number">缺口 1</div>
+      <h3>自己受傷<br>強制險沒你的份</h3>
+      <p>強制險是保「被你撞的人」，騎車的你本人受傷、骨折、住院，強制險一毛不賠。</p>
+      <span class="fix-badge">→ 補：駕駛人傷害險</span>
+    </div>
+    <div class="gap-card g2">
+      <div class="gap-number">缺口 2</div>
+      <h3>撞傷對方超過 20 萬<br>超出的你要自賠</h3>
+      <p>強制險傷害醫療上限 20 萬。對方若重傷或住院過久，超出部分你要自己想辦法。</p>
+      <span class="fix-badge">→ 補：第三人責任險</span>
+    </div>
+    <div class="gap-card g3">
+      <div class="gap-number">缺口 3</div>
+      <h3>住院期間<br>收入直接歸零</h3>
+      <p>受傷不能工作，健保只解決部分醫療費。住院差額、看護費、薪水空窗期全沒人補。</p>
+      <span class="fix-badge">→ 補：醫療險 + 意外險</span>
+    </div>
+  </div>
+
+  <!-- 4 張保單詳解 -->
+  <div class="section-title">四張必補保單，各自補什麼</div>
+  <div class="coverage-row">
+
+    <div class="cov-card c1">
+      <div class="cov-header">
+        <div class="cov-icon">🛡️</div>
+        <div>
+          <div class="cov-name">駕駛人傷害險</div>
+          <div class="cov-sub">保「騎車的你」本人</div>
+        </div>
+      </div>
+      <div class="cov-what">強制險不保騎車者本身，這張保單專門填補這個空缺。</div>
+      <ul class="cov-list">
+        <li><span class="icon-yes">✓</span> 騎車意外造成自身身故</li>
+        <li><span class="icon-yes">✓</span> 意外失能（殘廢）給付</li>
+        <li><span class="icon-yes">✓</span> 意外傷害醫療費用</li>
+        <li><span class="icon-no">✗</span> 疾病住院（非意外不保）</li>
+      </ul>
+    </div>
+
+    <div class="cov-card c2">
+      <div class="cov-header">
+        <div class="cov-icon">⚖️</div>
+        <div>
+          <div class="cov-name">第三人責任險</div>
+          <div class="cov-sub">補強「賠別人」的上限</div>
+        </div>
+      </div>
+      <div class="cov-what">強制險最高賠 20 萬，超出部分由這張保單接手，避免一場事故掏空存款。</div>
+      <ul class="cov-list">
+        <li><span class="icon-yes">✓</span> 對方身體傷害超出強制險上限部分</li>
+        <li><span class="icon-yes">✓</span> 對方財物損失賠償</li>
+        <li><span class="icon-yes">✓</span> 法律訴訟相關費用</li>
+        <li><span class="icon-no">✗</span> 自身傷亡（需搭配駕駛人傷害險）</li>
+      </ul>
+    </div>
+
+    <div class="cov-card c3">
+      <div class="cov-header">
+        <div class="cov-icon">🏥</div>
+        <div>
+          <div class="cov-name">醫療險</div>
+          <div class="cov-sub">補健保不足的住院費用</div>
+        </div>
+      </div>
+      <div class="cov-what">健保不能完全解決住院費用，醫療險補足住院差額、手術費等自費項目。</div>
+      <ul class="cov-list">
+        <li><span class="icon-yes">✓</span> 住院病房差額補貼</li>
+        <li><span class="icon-yes">✓</span> 手術費用理賠</li>
+        <li><span class="icon-yes">✓</span> 意外或疾病住院均可理賠</li>
+        <li><span class="icon-no">✗</span> 收入損失補貼（需另保意外險）</li>
+      </ul>
+    </div>
+
+    <div class="cov-card c4">
+      <div class="cov-header">
+        <div class="cov-icon">💰</div>
+        <div>
+          <div class="cov-name">意外險</div>
+          <div class="cov-sub">補住院期間薪水空窗</div>
+        </div>
+      </div>
+      <div class="cov-what">受傷不能上班，每天仍有住院日額補貼，讓你不用邊養傷邊擔心收入中斷。</div>
+      <ul class="cov-list">
+        <li><span class="icon-yes">✓</span> 意外住院日額給付（每日補貼）</li>
+        <li><span class="icon-yes">✓</span> 意外身故 / 失能保險金</li>
+        <li><span class="icon-yes">✓</span> 骨折不住院也有給付</li>
+        <li><span class="icon-no">✗</span> 疾病住院（僅限意外）</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- 總覽比較表 -->
+  <div class="section-title">一表看懂：五種保障各保什麼</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>保障項目</th>
+          <th class="col-mandatory">強制險</th>
+          <th class="col-driver">駕駛人<br>傷害險</th>
+          <th class="col-tpl">第三人<br>責任險</th>
+          <th class="col-medical">醫療險</th>
+          <th class="col-accident">意外險</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr class="section-head"><td colspan="6">自身保障</td></tr>
+        <tr>
+          <td>騎車受傷、骨折<sub>自身醫療費</sub></td>
+          <td class="col-mandatory"><span class="no">✗</span></td>
+          <td class="col-driver"><span class="yes">✓</span></td>
+          <td class="col-tpl"><span class="no">✗</span></td>
+          <td class="col-medical"><span class="yes">✓</span></td>
+          <td class="col-accident"><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>住院期間收入補貼<sub>日額或住院給付</sub></td>
+          <td class="col-mandatory"><span class="no">✗</span></td>
+          <td class="col-driver"><span class="no">✗</span></td>
+          <td class="col-tpl"><span class="no">✗</span></td>
+          <td class="col-medical"><span class="partial">部分</span></td>
+          <td class="col-accident"><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>意外身故 / 失能<sub>本人死亡或殘廢保險金</sub></td>
+          <td class="col-mandatory"><span class="no">✗</span></td>
+          <td class="col-driver"><span class="yes">✓</span></td>
+          <td class="col-tpl"><span class="no">✗</span></td>
+          <td class="col-medical"><span class="no">✗</span></td>
+          <td class="col-accident"><span class="yes">✓</span></td>
+        </tr>
+
+        <tr class="section-head"><td colspan="6">對他人的賠償</td></tr>
+        <tr>
+          <td>撞傷對方的醫療費<sub>最高 20 萬以內</sub></td>
+          <td class="col-mandatory"><span class="yes">✓</span></td>
+          <td class="col-driver"><span class="no">✗</span></td>
+          <td class="col-tpl"><span class="yes">✓</span></td>
+          <td class="col-medical"><span class="no">✗</span></td>
+          <td class="col-accident"><span class="no">✗</span></td>
+        </tr>
+        <tr>
+          <td>超出 20 萬的超額醫療費<sub>重傷長期住院時</sub></td>
+          <td class="col-mandatory"><span class="no">✗</span></td>
+          <td class="col-driver"><span class="no">✗</span></td>
+          <td class="col-tpl"><span class="yes">✓</span></td>
+          <td class="col-medical"><span class="no">✗</span></td>
+          <td class="col-accident"><span class="no">✗</span></td>
+        </tr>
+        <tr>
+          <td>撞壞對方財物<sub>車輛、路燈、圍牆等</sub></td>
+          <td class="col-mandatory"><span class="no">✗</span></td>
+          <td class="col-driver"><span class="no">✗</span></td>
+          <td class="col-tpl"><span class="yes">✓</span></td>
+          <td class="col-medical"><span class="no">✗</span></td>
+          <td class="col-accident"><span class="no">✗</span></td>
+        </tr>
+
+        <tr class="section-head"><td colspan="6">投保性質</td></tr>
+        <tr>
+          <td>是否強制投保</td>
+          <td class="col-mandatory"><span class="must">強制</span></td>
+          <td class="col-driver"><span class="opt">自願</span></td>
+          <td class="col-tpl"><span class="opt">自願</span></td>
+          <td class="col-medical"><span class="opt">自願</span></td>
+          <td class="col-accident"><span class="opt">自願</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 建議組合 -->
+  <div class="combo-box">
+    <h4>📋 機車族建議基本配置</h4>
+    <div class="combo-flow">
+      <div class="combo-item mandatory">
+        強制險
+        <span class="ci-label">法定必保</span>
+      </div>
+      <span class="combo-plus">+</span>
+      <div class="combo-item recommend">
+        駕駛人傷害險
+        <span class="ci-label">保自己</span>
+      </div>
+      <span class="combo-plus">+</span>
+      <div class="combo-item recommend">
+        第三人責任險
+        <span class="ci-label">保賠別人</span>
+      </div>
+      <span class="combo-plus">+</span>
+      <div class="combo-item recommend">
+        醫療險
+        <span class="ci-label">補住院費</span>
+      </div>
+      <span class="combo-plus">+</span>
+      <div class="combo-item recommend">
+        意外險
+        <span class="ci-label">補收入</span>
+      </div>
+    </div>
+    <p class="combo-note">
+      強制險是底線，其餘四張是真正讓你「出事不怕」的防線。<br>
+      每個人需求不同，建議根據職業、收入、騎車頻率調整保額與組合。
+    </p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h3>想知道自己缺哪一塊？</h3>
+    <p>在 IG 貼文底下留言，我會把這份清單私訊給你<br>讓你對照自己現有的保險，找出真正的缺口</p>
+    <span class="cta-keyword">留言「缺口」</span>
+    <p class="cta-sub">收到清單後，有任何問題也歡迎私訊 @tony.insurance</p>
+  </div>
+
+  <!-- 備注 -->
+  <div class="notice">
+    <strong>⚠ 注意事項</strong><br>
+    ① 強制險傷害醫療給付上限為 20 萬元（2024 年現行規定），超出部分須自行負擔。<br>
+    ② 駕駛人傷害險屬產險附加險種，需與強制險或第三人責任險搭配投保。<br>
+    ③ 醫療險與意外險屬壽險範疇，保費與保額依個人年齡、健康狀況、保險公司而異。<br>
+    ④ 各保險公司條款細節不同，實際理賠以投保保單條款為準，建議詳閱條款或諮詢專業人員。
+  </div>
+
+  <footer>
+    <p>by <a href="https://www.instagram.com/tony.insurance" target="_blank">@tony.insurance</a>｜保險疑問歡迎私訊</p>
+  </footer>
+
+</body>
+</html>
