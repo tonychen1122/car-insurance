@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>車禍後 3 筆錢怎麼申請｜完整流程懶人包</title>
+  <style>
+    :root {
+      --indigo: #4F46E5;
+      --green:  #059669;
+      --amber:  #B45309;
+      --border: #E5E7EB;
+      --gray:   #6B7280;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif;
+      background: #F3F4F6;
+      color: #111827;
+      padding: 32px 16px 64px;
+    }
+
+    /* ── 頁首 ── */
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .header .tag {
+      display: inline-block;
+      background: #FFF1F2;
+      color: #E11D48;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .header p {
+      margin-top: 10px;
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    /* ── 緊急電話列 ── */
+    .phone-row {
+      display: flex;
+      gap: 12px;
+      max-width: 860px;
+      margin: 0 auto 36px;
+      flex-wrap: wrap;
+    }
+    .phone-card {
+      flex: 1;
+      min-width: 200px;
+      background: #1E1B4B;
+      border-radius: 14px;
+      padding: 16px 18px;
+      color: #fff;
+    }
+    .phone-card .pc-label { font-size: 11px; color: #A5B4FC; font-weight: 600; letter-spacing: .06em; margin-bottom: 4px; }
+    .phone-card .pc-num  { font-size: 20px; font-weight: 800; letter-spacing: .04em; }
+    .phone-card .pc-desc { font-size: 11.5px; color: #C7D2FE; margin-top: 3px; }
+
+    /* ── 章節標題 ── */
+    .section-title {
+      max-width: 860px;
+      margin: 0 auto 16px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: #6B7280;
+      text-transform: uppercase;
+    }
+
+    /* ── 申請管道大卡 ── */
+    .channel-card {
+      max-width: 860px;
+      margin: 0 auto 24px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      overflow: hidden;
+    }
+
+    .channel-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .ch-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    .channel-card.c1 .ch-num { background: #EEF2FF; color: var(--indigo); }
+    .channel-card.c2 .ch-num { background: #D1FAE5; color: var(--green); }
+    .channel-card.c3 .ch-num { background: #FEF3C7; color: var(--amber); }
+
+    .ch-title-wrap h2 { font-size: 17px; font-weight: 800; }
+    .channel-card.c1 .ch-title-wrap h2 { color: var(--indigo); }
+    .channel-card.c2 .ch-title-wrap h2 { color: var(--green); }
+    .channel-card.c3 .ch-title-wrap h2 { color: var(--amber); }
+    .ch-title-wrap p { font-size: 12.5px; color: #6B7280; margin-top: 2px; }
+
+    .channel-body {
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* 申請步驟 */
+    .steps-col h4 {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      color: #6B7280;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .step-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .step-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .channel-card.c1 .step-dot { background: #EEF2FF; color: var(--indigo); }
+    .channel-card.c2 .step-dot { background: #D1FAE5; color: var(--green); }
+    .channel-card.c3 .step-dot { background: #FEF3C7; color: var(--amber); }
+
+    .step-text { font-size: 13px; color: #374151; line-height: 1.7; }
+    .step-text strong { color: #111827; }
+    .step-text .note { font-size: 11.5px; color: #9CA3AF; margin-top: 2px; display: block; }
+
+    /* 必備文件 */
+    .docs-col h4 {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      color: #6B7280;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .doc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .doc-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12.5px;
+      color: #374151;
+      line-height: 1.6;
+    }
+    .doc-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1.5px solid;
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .channel-card.c1 .doc-check { border-color: #818CF8; color: var(--indigo); }
+    .channel-card.c2 .doc-check { border-color: #34D399; color: var(--green); }
+    .channel-card.c3 .doc-check { border-color: #FCD34D; color: var(--amber); }
+
+    .doc-item .doc-sub { font-size: 11px; color: #9CA3AF; margin-top: 1px; display: block; }
+
+    /* 底部提醒列 */
+    .channel-footer {
+      background: #F8FAFC;
+      border-top: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .cf-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #374151;
+    }
+    .cf-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 99px;
+      flex-shrink: 0;
+    }
+    .channel-card.c1 .cf-badge { background: #EEF2FF; color: var(--indigo); }
+    .channel-card.c2 .cf-badge { background: #D1FAE5; color: var(--green); }
+    .channel-card.c3 .cf-badge { background: #FEF3C7; color: var(--amber); }
+
+    /* ── 重點提醒 ── */
+    .tip-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      max-width: 860px;
+      margin: 0 auto 28px;
+    }
+    .tip-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    }
+    .tip-card h4 {
+      font-size: 13px;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tip-card ul {
+      padding-left: 16px;
+    }
+    .tip-card li {
+      font-size: 12.5px;
+      color: #374151;
+      line-height: 1.9;
+    }
+    .tip-card li strong { color: #111827; }
+
+    /* ── 時間軸 ── */
+    .timeline-box {
+      max-width: 860px;
+      margin: 0 auto 28px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    }
+    .timeline-box h4 {
+      font-size: 13px;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 18px;
+    }
+    .tl-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+    .tl-items::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #E5E7EB;
+    }
+    .tl-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding-bottom: 18px;
+      position: relative;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .tl-dot.d-red    { background: #FEE2E2; color: #B91C1C; }
+    .tl-dot.d-indigo { background: #EEF2FF; color: #4338CA; }
+    .tl-dot.d-green  { background: #D1FAE5; color: #065F46; }
+    .tl-dot.d-amber  { background: #FEF3C7; color: #92400E; }
+    .tl-dot.d-gray   { background: #F3F4F6; color: #374151; }
+
+    .tl-content { padding-top: 8px; }
+    .tl-time { font-size: 12px; font-weight: 700; color: #9CA3AF; margin-bottom: 2px; }
+    .tl-text { font-size: 13px; color: #374151; line-height: 1.7; }
+    .tl-text strong { color: #111827; }
+
+    /* ── CTA ── */
+    .cta-box {
+      max-width: 860px;
+      margin: 0 auto 28px;
+      background: linear-gradient(135deg, #1E1B4B, #312E81);
+      border-radius: 20px;
+      padding: 28px 24px;
+      text-align: center;
+      color: #fff;
+    }
+    .cta-box h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+    .cta-box p { font-size: 13.5px; color: #C7D2FE; margin-bottom: 20px; line-height: 1.7; }
+    .cta-keyword {
+      display: inline-block;
+      background: #fff;
+      color: #1E1B4B;
+      font-size: 15px;
+      font-weight: 800;
+      padding: 10px 28px;
+      border-radius: 99px;
+      letter-spacing: .05em;
+    }
+    .cta-sub { margin-top: 14px; font-size: 12px; color: #A5B4FC; }
+
+    /* ── 備注 ── */
+    .notice {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 12px;
+      color: #64748B;
+      line-height: 1.9;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 36px;
+      font-size: 12px;
+      color: #9CA3AF;
+    }
+    footer a { color: var(--indigo); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .channel-body { grid-template-columns: 1fr; }
+      .tip-row { grid-template-columns: 1fr; }
+      .phone-row { flex-direction: column; }
+      .channel-footer { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="tag">車禍理賠｜申請流程懶人包</div>
+    <h1>車禍後可以申請的 3 筆錢<br>每一筆都有獨立的申請管道</h1>
+    <p>來源：特別補償基金官網、金管會、保險法第 34、58、65 條</p>
+  </div>
+
+  <!-- 緊急電話 -->
+  <div class="phone-row">
+    <div class="phone-card">
+      <div class="pc-label">查詢對方有無投保強制險</div>
+      <div class="pc-num">0800-825-688</div>
+      <div class="pc-desc">事故後第一步：先查這個</div>
+    </div>
+    <div class="phone-card">
+      <div class="pc-label">汽機車特別補償基金</div>
+      <div class="pc-num">0800-565-678</div>
+      <div class="pc-desc">肇事逃逸 / 對方未投保時使用</div>
+    </div>
+  </div>
+
+  <!-- 管道 1 -->
+  <div class="section-title">三個申請管道 — 逐步完整說明</div>
+  <div class="channel-card c1">
+    <div class="channel-header">
+      <div class="ch-num">1</div>
+      <div class="ch-title-wrap">
+        <h2>對方的強制險</h2>
+        <p>只要你是受害人，不管責任誰的，一定要先申請這筆</p>
+      </div>
+    </div>
+    <div class="channel-body">
+      <div class="steps-col">
+        <h4>申請步驟</h4>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot">1</div>
+            <div class="step-text">
+              <strong>事故當下立刻報警</strong>
+              <span class="note">取得「道路交通事故當事人登記聯單」</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot">2</div>
+            <div class="step-text">
+              <strong>撥打 0800-825-688 確認對方有無投保</strong>
+              <span class="note">有投保 → 直接找對方的產險公司申請</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot">3</div>
+            <div class="step-text">
+              <strong>前往就醫，保留所有收據與診斷書</strong>
+              <span class="note">不同醫院各自申請一份診斷書</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot">4</div>
+            <div class="step-text">
+              <strong>向對方投保的產險公司提出申請</strong>
+              <span class="note">不需要對方同意，直接聯絡保險公司</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot">5</div>
+            <div class="step-text">
+              <strong>備齊文件後送件，等待理賠</strong>
+              <span class="note">保險公司應在收齊文件後 10 個工作日內給付</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="docs-col">
+        <h4>必備文件清單</h4>
+        <div class="doc-list">
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              身分證明文件
+              <span class="doc-sub">請求權人本人身分證</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              道路交通事故當事人登記聯單
+              <span class="doc-sub">事故當下由警方提供</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              事故現場圖、照片
+              <span class="doc-sub">事故後 7 日起，向警察機關申請</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              道路交通事故初步分析研判表
+              <span class="doc-sub">事故後 30 日起，向警察機關申請</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              合格醫師開具的診斷證明書
+              <span class="doc-sub">每間醫院各申請一份，需為正本</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              醫療費用收據
+              <span class="doc-sub">正本或加蓋「與正本相符」章的影本</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              金融機構存摺封面影本
+              <span class="doc-sub">供匯款用</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="channel-footer">
+      <div class="cf-item"><span class="cf-badge">上限</span>傷害醫療每人最高 20 萬｜死亡 200 萬（2026/07/01 起調漲為 300 萬）｜失能 5 萬～200 萬</div>
+      <div class="cf-item"><span class="cf-badge">期限</span>自得請求之日起 2 年內申請（保險法第 65 條）</div>
+    </div>
+  </div>
+
+  <!-- 管道 2 -->
+  <div class="channel-card c2">
+    <div class="channel-header">
+      <div class="ch-num">2</div>
+      <div class="ch-title-wrap">
+        <h2>汽機車特別補償金</h2>
+        <p>對方肇事逃逸、或未投保強制險時適用，由政府補償機制代為保障</p>
+      </div>
+    </div>
+    <div class="channel-body">
+      <div class="steps-col">
+        <h4>申請步驟</h4>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot">1</div>
+            <div class="step-text">
+              <strong>事故當下立刻報警，固定現場證據</strong>
+              <span class="note">肇逃案件事後補件困難，現場資料至關重要</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot">2</div>
+            <div class="step-text">
+              <strong>撥打 0800-825-688 確認對方是否未投保</strong>
+              <span class="note">確認屬於特補基金案件後，才往下走</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot">3</div>
+            <div class="step-text">
+              <strong>前往任一家產險公司辦理申請</strong>
+              <span class="note">特補基金委託各產險公司代辦，不需找特定機構</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot">4</div>
+            <div class="step-text">
+              <strong>向產險公司索取補充表單並填寫</strong>
+              <span class="note">申請書、未獲賠償聲明書等，現場可拿到</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot">5</div>
+            <div class="step-text">
+              <strong>備齊文件一次送件</strong>
+              <span class="note">補件拖延最慢，盡量一次備齊</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="docs-col">
+        <h4>必備文件清單</h4>
+        <div class="doc-list">
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              請求權人身分證明文件
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              道路交通事故當事人登記聯單
+              <span class="doc-sub">事故當下取得</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              事故現場圖、照片、初步分析研判表
+              <span class="doc-sub">事故後 7 日 / 30 日向警察機關申請</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              診斷證明書
+              <span class="doc-sub">各就診醫院分別申請</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              醫療費用收據或影本
+              <span class="doc-sub">影本需加蓋醫療機構收據專用章</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              補充文件（向產險公司索取）
+              <span class="doc-sub">特別補償基金申請書、未獲賠償聲明書、同意查閱病歷聲明書</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              金融機構存摺封面影本
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="channel-footer">
+      <div class="cf-item"><span class="cf-badge">上限</span>補償上限同強制險（傷害醫療 20 萬｜死亡 200 萬，2026/07/01 起 300 萬）</div>
+      <div class="cf-item"><span class="cf-badge">洽詢</span>特補基金專線 0800-565-678，或至任一產險公司</div>
+    </div>
+  </div>
+
+  <!-- 管道 3 -->
+  <div class="channel-card c3">
+    <div class="channel-header">
+      <div class="ch-num">3</div>
+      <div class="ch-title-wrap">
+        <h2>自己的意外險、醫療險</h2>
+        <p>名下有保險的人，出事後可另外向自己的保險公司申請，法律明定不可拒絕或減少理賠</p>
+      </div>
+    </div>
+    <div class="channel-body">
+      <div class="steps-col">
+        <h4>申請步驟</h4>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-dot">1</div>
+            <div class="step-text">
+              <strong>事故發生後儘快通知保險公司</strong>
+              <span class="note">保險法第 58 條建議 5 日內通知</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot">2</div>
+            <div class="step-text">
+              <strong>確認自己的險種與保障範圍</strong>
+              <span class="note">意外險、醫療險（日額型 / 實支實付型）申請方式不同</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot">3</div>
+            <div class="step-text">
+              <strong>向保險公司索取理賠申請書</strong>
+              <span class="note">填寫完畢後須本人親自簽名，不可代簽</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot">4</div>
+            <div class="step-text">
+              <strong>備齊文件：交給業務員 / 郵寄 / 親洽</strong>
+              <span class="note">也可至保險公司官網下載申請書後自行寄送</span>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-dot">5</div>
+            <div class="step-text">
+              <strong>若有多張保單，每張分開各別申請</strong>
+              <span class="note">實支實付兩張以上注意損害填補原則（見下方說明）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="docs-col">
+        <h4>必備文件清單</h4>
+        <div class="doc-list">
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              理賠申請書
+              <span class="doc-sub">向保險公司索取，本人親簽</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              診斷證明書（正本）
+              <span class="doc-sub">有幾家保險公司就申請幾份，影印本無效</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              醫療費用收據
+              <span class="doc-sub">【日額型】不需收據｜【實支實付】需正本，多張保單另申請副本</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              意外事故證明文件
+              <span class="doc-sub">車禍報案資料、警方證明（申請意外險時需要）</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              X 光片
+              <span class="doc-sub">申請骨折相關給付時需附</span>
+            </div>
+          </div>
+          <div class="doc-item">
+            <div class="doc-check">✓</div>
+            <div>
+              受益人身分證明文件
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="channel-footer">
+      <div class="cf-item"><span class="cf-badge">申請期限</span>保險法第 65 條：自得請求之日起 2 年內</div>
+      <div class="cf-item"><span class="cf-badge">給付期限</span>保險法第 34 條：收到完整文件後 15 日內給付</div>
+    </div>
+  </div>
+
+  <!-- 事故後時間軸 -->
+  <div class="section-title">事故發生後，什麼時間做什麼事</div>
+  <div class="timeline-box">
+    <h4>⏱ 事故後行動時間軸</h4>
+    <div class="tl-items">
+      <div class="tl-item">
+        <div class="tl-dot d-red">當下</div>
+        <div class="tl-content">
+          <div class="tl-time">事故當下</div>
+          <div class="tl-text"><strong>報警處理</strong>，取得「道路交通事故當事人登記聯單」，拍照保留現場</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot d-indigo">5日</div>
+        <div class="tl-content">
+          <div class="tl-time">事故後 5 日內</div>
+          <div class="tl-text">通知<strong>自己的保險公司</strong>（意外險、醫療險），確認保障範圍與申請文件</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot d-indigo">7日</div>
+        <div class="tl-content">
+          <div class="tl-time">事故後 7 日起</div>
+          <div class="tl-text">可向<strong>警察機關</strong>申請事故現場圖及照片</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot d-green">30日</div>
+        <div class="tl-content">
+          <div class="tl-time">事故後 30 日起</div>
+          <div class="tl-text">可向<strong>警察機關</strong>申請「道路交通事故初步分析研判表」（強制險 / 特補基金申請必備）</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot d-amber">陸續</div>
+        <div class="tl-content">
+          <div class="tl-time">治療結束後</div>
+          <div class="tl-text">備齊三個管道的文件，<strong>分別向各管道提出申請</strong>，不互相影響</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot d-gray">2年</div>
+        <div class="tl-content">
+          <div class="tl-time">最晚期限</div>
+          <div class="tl-text">三個管道均適用<strong>自得請求之日起 2 年</strong>的申請期限，超過視同放棄</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 重點提醒 -->
+  <div class="section-title">兩個重點提醒</div>
+  <div class="tip-row">
+    <div class="tip-card">
+      <h4>💡 三筆錢可以同時申請</h4>
+      <ul>
+        <li>三個管道<strong>彼此獨立</strong>，可同時進行</li>
+        <li>申請管道 1 不影響管道 3，申請順序依個人方便</li>
+        <li>每個管道各自備齊文件即可，不需等其他管道核准</li>
+        <li>法律明定：不得因有其他保險而拒絕或減少理賠</li>
+      </ul>
+    </div>
+    <div class="tip-card">
+      <h4>⚠️ 實支實付兩張以上要注意</h4>
+      <ul>
+        <li>意外險、日額醫療險：多張保單<strong>可各自申請</strong></li>
+        <li>實支實付兩張以上：受「損害填補原則」限制，不可超額重複請領</li>
+        <li>例外：其中一張載明「<strong>副本理賠</strong>」，則可與正本保單分別申請</li>
+        <li>不確定自己的保單類型，直接問業務員</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h3>這份流程懶人包存起來</h3>
+    <p>平常用不到，但出事的當下你會感謝自己事先知道<br>在 IG 貼文留言，我直接把這份清單私訊給你</p>
+    <span class="cta-keyword">留言「3筆錢」</span>
+    <p class="cta-sub">收到後有任何問題，歡迎私訊 @tony.insurance</p>
+  </div>
+
+  <!-- 備注 -->
+  <div class="notice">
+    資料來源：財團法人汽車交通事故特別補償基金官網（mvacf.org.tw）、金融監督管理委員會公告（2025/4/24）、保險法第 34、58、65 條。<br>
+    強制險傷害醫療給付上限維持 20 萬。死亡給付現行為 200 萬，<strong>2026/07/01 起調漲為 300 萬</strong>（失能第一等級同步調整），合計上限由 220 萬調整為 320 萬；2026/07/01 前發生之事故依調漲前規定辦理。<br>
+    各保險公司條款細節不同，實際理賠以投保保單條款為準，建議諮詢專業人員。
+  </div>
+
+  <footer>
+    <p>by <a href="https://www.instagram.com/tony.insurance" target="_blank">@tony.insurance</a>｜保險疑問歡迎私訊</p>
+  </footer>
+
+</body>
+</html>
