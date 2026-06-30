@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>颱風泡水，你的車險保得到嗎？</title>
+  <style>
+    :root {
+      --indigo: #4F46E5;
+      --green:  #059669;
+      --amber:  #B45309;
+      --red:    #DC2626;
+      --gray:   #6B7280;
+      --border: #E5E7EB;
+      --blue:   #0369A1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif;
+      background: #F3F4F6;
+      color: #111827;
+      padding: 32px 16px 64px;
+    }
+
+    /* ── 頁首 ── */
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .header .tag {
+      display: inline-block;
+      background: #EFF6FF;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 800;
+      line-height: 1.35;
+    }
+    .header p {
+      margin-top: 10px;
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    /* ── 警示區塊 ── */
+    .alert-box {
+      max-width: 640px;
+      margin: 0 auto 28px;
+      background: #FEF2F2;
+      border: 1.5px solid #FECACA;
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .alert-box .alert-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #B91C1C;
+      margin-bottom: 10px;
+    }
+    .alert-box ul {
+      padding-left: 18px;
+    }
+    .alert-box li {
+      font-size: 13.5px;
+      color: #374151;
+      line-height: 2;
+    }
+    .alert-box li strong { color: #B91C1C; }
+
+    /* ── 主表 ── */
+    .table-wrap {
+      max-width: 640px;
+      margin: 0 auto 24px;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    }
+    table { width: 100%; border-collapse: collapse; }
+
+    thead tr { background: #1E3A5F; }
+    thead th {
+      padding: 14px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      text-align: left;
+    }
+    thead th:last-child { text-align: center; width: 120px; }
+
+    .section-head td {
+      background: #F1F5F9;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: #475569;
+      padding: 7px 16px;
+    }
+
+    tbody tr { border-bottom: 1px solid var(--border); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #FAFAFA; }
+
+    td {
+      padding: 13px 16px;
+      font-size: 13.5px;
+      vertical-align: middle;
+    }
+    td:last-child { text-align: center; }
+    td sub {
+      font-size: 11px;
+      color: #9CA3AF;
+      display: block;
+      margin-top: 2px;
+      font-weight: 400;
+    }
+
+    .yes   { color: #059669; font-size: 20px; font-weight: 800; }
+    .no    { color: #DC2626; font-size: 20px; font-weight: 800; }
+    .addon {
+      display: inline-block;
+      background: #FEF3C7;
+      color: #92400E;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+
+    /* ── 附加條款說明 ── */
+    .addon-card {
+      max-width: 640px;
+      margin: 0 auto 24px;
+      background: #FFFBEB;
+      border: 1.5px solid #FDE68A;
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .addon-card h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: #92400E;
+      margin-bottom: 12px;
+    }
+    .addon-card .addon-name {
+      background: #F59E0B;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 10px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+    .addon-card ul {
+      padding-left: 18px;
+    }
+    .addon-card li {
+      font-size: 13px;
+      color: #374151;
+      line-height: 2;
+    }
+    .addon-card li strong { color: #92400E; }
+
+    /* ── 確認清單 ── */
+    .checklist-card {
+      max-width: 640px;
+      margin: 0 auto 24px;
+      background: #F0FDF4;
+      border: 1.5px solid #A7F3D0;
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .checklist-card h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: #065F46;
+      margin-bottom: 14px;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .check-item:last-child { margin-bottom: 0; }
+    .check-box {
+      width: 22px;
+      height: 22px;
+      border: 2px solid #34D399;
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .check-label {
+      font-size: 13.5px;
+      color: #374151;
+      line-height: 1.6;
+    }
+    .check-label strong { color: #065F46; }
+
+    /* ── 誰特別需要 ── */
+    .need-card {
+      max-width: 640px;
+      margin: 0 auto 24px;
+      background: #EFF6FF;
+      border: 1.5px solid #BFDBFE;
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .need-card h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .need-tag {
+      display: inline-block;
+      background: #DBEAFE;
+      color: #1E40AF;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin: 4px 4px 4px 0;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 28px;
+      font-size: 11.5px;
+      color: #9CA3AF;
+    }
+
+    @media (max-width: 480px) {
+      td, thead th { font-size: 12.5px; padding: 11px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="tag">產險｜車體損失險附加條款</div>
+    <h1>颱風泡水，你的車險<br>保得到嗎？</h1>
+    <p>很多人不知道的車險空窗，颱風前先確認</p>
+  </div>
+
+  <!-- 警示區塊 -->
+  <div class="alert-box">
+    <div class="alert-title">⚠ 先說結論：基本車體險不賠天災</div>
+    <ul>
+      <li>車體損失險（甲、乙、丙）<strong>基本範圍不含颱風、洪水、地震</strong></li>
+      <li>就算保了甲式，颱風泡水<strong>也不理賠</strong></li>
+      <li>需要另外加保附加條款，才保得到</li>
+    </ul>
+  </div>
+
+  <!-- 比較表 -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>損失情況</th>
+          <th>保不保？</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr class="section-head"><td colspan="2">車體險基本保障（甲/乙/丙）</td></tr>
+        <tr>
+          <td>車對車碰撞、擦撞</td>
+          <td><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>自撞電線桿、護欄、牆壁（僅甲乙式）</td>
+          <td><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>火災、爆炸、閃電砸損（僅甲乙式）</td>
+          <td><span class="yes">✓</span></td>
+        </tr>
+
+        <tr class="section-head"><td colspan="2">天災損失（需另加附加條款）</td></tr>
+        <tr>
+          <td>颱風、強風吹倒物砸車<sub>招牌、樹木倒塌壓車</sub></td>
+          <td><span class="addon">需加保</span></td>
+        </tr>
+        <tr>
+          <td>洪水、淹水、積水泡水<sub>停車場淹水、路面積水淹過引擎</sub></td>
+          <td><span class="addon">需加保</span></td>
+        </tr>
+        <tr>
+          <td>地震搖晃導致車輛受損</td>
+          <td><span class="addon">需加保</span></td>
+        </tr>
+        <tr>
+          <td>冰雹打傷車體<sub>台灣較少見，但仍在同一附加條款內</sub></td>
+          <td><span class="addon">需加保</span></td>
+        </tr>
+        <tr>
+          <td>海嘯<sub>沿海地區適用</sub></td>
+          <td><span class="addon">需加保</span></td>
+        </tr>
+
+        <tr class="section-head"><td colspan="2">所有車體險都不保</td></tr>
+        <tr>
+          <td>整車失竊<sub>需另外投保竊盜損失險</sub></td>
+          <td><span class="no">✗</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 附加條款說明 -->
+  <div class="addon-card">
+    <h3>要加這個條款才保得到</h3>
+    <div class="addon-name">颱風、地震、海嘯、冰雹、洪水或因雨積水附加條款</div>
+    <ul>
+      <li>附加在車體損失險（甲式或乙式）之下</li>
+      <li><strong>丙式車體險無法附加此條款</strong></li>
+      <li>保費通常不高，但要主動加保，不會自動包含</li>
+      <li>續保時也要確認有勾選，換公司投保時同樣要重新加</li>
+    </ul>
+  </div>
+
+  <!-- 確認清單 -->
+  <div class="checklist-card">
+    <h3>怎麼確認自己保單有沒有這個？</h3>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-label">翻出車險保單，找「<strong>附加條款</strong>」那一欄</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-label">確認有沒有「<strong>颱風、地震、海嘯⋯附加條款</strong>」這串字</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-label">若是丙式車體險，此附加條款<strong>無法加保</strong>，需考慮升級至乙式</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-label">每年續保時重新確認，<strong>不要假設去年有加今年也會自動延續</strong></div>
+    </div>
+  </div>
+
+  <!-- 誰特別需要 -->
+  <div class="need-card">
+    <h3>這幾種情況特別需要加保</h3>
+    <span class="need-tag">🏠 住颱風常襲地區</span>
+    <span class="need-tag">🚗 停露天停車場</span>
+    <span class="need-tag">🌊 住沿海或低窪地區</span>
+    <span class="need-tag">🆕 新車或高價車</span>
+    <span class="need-tag">💧 地下停車場有淹水紀錄</span>
+    <span class="need-tag">📋 車貸未還清</span>
+  </div>
+
+  <footer>
+    <p>by <a href="https://www.instagram.com/tony.insurance" target="_blank">@tony.insurance</a></p>
+    <p style="margin-top:6px;">資料來源：金管會、中華民國產物保險商業同業公會｜僅供參考，實際理賠以保單條款為準</p>
+  </footer>
+
+</body>
+</html>
