@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>開車出門，這幾張保險你有嗎？</title>
+  <style>
+    :root {
+      --green:  #059669;
+      --blue:   #0369A1;
+      --indigo: #4338CA;
+      --amber:  #B45309;
+      --gray:   #6B7280;
+      --border: #E5E7EB;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif;
+      background: #F3F4F6;
+      color: #111827;
+      padding: 32px 16px 64px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .header .tag {
+      display: inline-block;
+      background: #EFF6FF;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: clamp(21px, 4vw, 28px);
+      font-weight: 800;
+      line-height: 1.4;
+    }
+    .header p {
+      margin-top: 10px;
+      color: var(--gray);
+      font-size: 13.5px;
+    }
+
+    /* ── 卡片 ── */
+    .card {
+      max-width: 640px;
+      margin: 0 auto 16px;
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px rgba(0,0,0,.07);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+    }
+    .card-emoji {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+    .card-name {
+      font-size: 15px;
+      font-weight: 800;
+    }
+    .card-desc {
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+
+    .card-body {
+      border-top: 1px solid var(--border);
+      padding: 14px 20px 16px;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 8px 0;
+      border-bottom: 1px dashed #F3F4F6;
+      gap: 16px;
+    }
+    .row:last-child { border-bottom: none; }
+    .row-label {
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.5;
+    }
+    .row-label small {
+      display: block;
+      font-size: 11.5px;
+      color: #9CA3AF;
+      margin-top: 2px;
+    }
+    .row-val {
+      font-size: 13px;
+      font-weight: 700;
+      text-align: right;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tip {
+      margin: 12px 20px 0;
+      background: #F9FAFB;
+      border-left: 3px solid var(--border);
+      border-radius: 0 8px 8px 0;
+      padding: 9px 13px;
+      font-size: 12.5px;
+      color: #4B5563;
+      line-height: 1.7;
+    }
+    .spacer { height: 16px; }
+
+    /* colour helpers */
+    .c-green  { color: #059669; }
+    .c-blue   { color: var(--blue); }
+    .c-indigo { color: var(--indigo); }
+    .c-amber  { color: var(--amber); }
+    .c-red    { color: #DC2626; }
+
+    .bg-green  { background: #ECFDF5; }
+    .bg-blue   { background: #EFF6FF; }
+    .bg-amber  { background: #FFFBEB; }
+    .bg-indigo { background: #EEF2FF; }
+
+    /* ── 速查總表 ── */
+    .table-wrap {
+      max-width: 640px;
+      margin: 28px auto 0;
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px rgba(0,0,0,.07);
+    }
+    .table-title {
+      padding: 14px 20px;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #1E3A5F;
+      background: #F1F5F9;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { background: #1E3A5F; }
+    thead th {
+      padding: 11px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+    }
+    thead th:first-child { text-align: left; }
+    tbody tr { border-bottom: 1px solid var(--border); }
+    tbody tr:last-child { border-bottom: none; }
+    td {
+      padding: 11px 12px;
+      font-size: 12.5px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    td:first-child { text-align: left; font-weight: 600; }
+    .yes { color: #059669; font-size: 17px; font-weight: 800; }
+    .no  { color: #DC2626; font-size: 17px; font-weight: 800; }
+    .optional {
+      display: inline-block;
+      background: #FEF3C7;
+      color: #92400E;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 11.5px;
+      color: #9CA3AF;
+      line-height: 1.8;
+    }
+    footer a { color: #9CA3AF; }
+
+    @media (max-width: 480px) {
+      td, thead th { font-size: 11.5px; padding: 9px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="tag">車險 ✕ 人身保障</div>
+    <h1>開車出門，<br>這幾張保險你搞懂了嗎？</h1>
+    <p>從強制險到意外醫療，一次看清楚各自保什麼</p>
+  </div>
+
+  <!-- 強制險 -->
+  <div class="card">
+    <div class="card-header bg-green">
+      <div class="card-emoji">🛡️</div>
+      <div>
+        <div class="card-name c-green">強制險</div>
+        <div class="card-desc">法律強制投保 ｜ 保車外第三人的人身傷亡</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="row-label">保障對象</div>
+        <div class="row-val">對方駕駛、乘客、路人<br><span style="font-size:11px;color:#9CA3AF;">不含我方駕駛本人</span></div>
+      </div>
+      <div class="row">
+        <div class="row-label">傷害醫療費用</div>
+        <div class="row-val c-amber">每人最高 20 萬</div>
+      </div>
+      <div class="row">
+        <div class="row-label">失能給付</div>
+        <div class="row-val">最高 300 萬<br><span style="font-size:11px;color:#9CA3AF;">依 15 等級給付</span></div>
+      </div>
+      <div class="row">
+        <div class="row-label">死亡給付</div>
+        <div class="row-val">最高 300 萬</div>
+      </div>
+      <div class="row">
+        <div class="row-label">保財物損失（車輛）？</div>
+        <div class="row-val c-red">✗ 不保</div>
+      </div>
+    </div>
+    <div class="tip">
+      💡 醫療 20 萬有細項子限，看護費每日上限 1,200 元、病房差額每日 1,500 元⋯⋯實際能賠到的通常比 20 萬少。
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- 第三責任險 -->
+  <div class="card">
+    <div class="card-header bg-blue">
+      <div class="card-emoji">⚖️</div>
+      <div>
+        <div class="card-name c-blue">第三人責任險</div>
+        <div class="card-desc">任意險 ｜ 補強強制險不足的體傷與財損</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="row-label">保障對象</div>
+        <div class="row-val">對方駕駛、乘客、路人<br>對方車輛 / 財物</div>
+      </div>
+      <div class="row">
+        <div class="row-label">
+          什麼時候啟動？
+          <small>需有肇責才賠</small>
+        </div>
+        <div class="row-val c-blue">超出強制險<br>的部分</div>
+      </div>
+      <div class="row">
+        <div class="row-label">體傷建議保額（汽車）</div>
+        <div class="row-val">每人 300 萬<br>每事故 1,500 萬</div>
+      </div>
+      <div class="row">
+        <div class="row-label">財損建議保額（汽車）</div>
+        <div class="row-val">每事故 100 萬</div>
+      </div>
+    </div>
+    <div class="tip">
+      💡 酒駕、毒駕、無照等犯罪行為屬除外不保事項，保險公司依條款可拒賠。
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- 車體險 -->
+  <div class="card">
+    <div class="card-header bg-amber">
+      <div class="card-emoji">🚗</div>
+      <div>
+        <div class="card-name c-amber">車體損失險</div>
+        <div class="card-desc">任意險 ｜ 保自己的車輛損失</div>
+      </div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="background:#FFFBEB;">
+            <th style="padding:10px 14px;font-size:12.5px;font-weight:700;color:#92400E;text-align:left;border-bottom:1px solid var(--border);">保障項目</th>
+            <th style="padding:10px 10px;font-size:12.5px;font-weight:700;color:#92400E;text-align:center;border-bottom:1px solid var(--border);">甲式</th>
+            <th style="padding:10px 10px;font-size:12.5px;font-weight:700;color:#92400E;text-align:center;border-bottom:1px solid var(--border);">乙式</th>
+            <th style="padding:10px 10px;font-size:12.5px;font-weight:700;color:#92400E;text-align:center;border-bottom:1px solid var(--border);">丙式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:10px 14px;font-size:13px;font-weight:400;">車對車碰撞</td>
+            <td style="text-align:center;"><span class="yes">✓</span></td>
+            <td style="text-align:center;"><span class="yes">✓</span></td>
+            <td style="text-align:center;"><span class="yes">✓</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:10px 14px;font-size:13px;font-weight:400;">車對物碰撞、傾覆</td>
+            <td style="text-align:center;"><span class="yes">✓</span></td>
+            <td style="text-align:center;"><span class="yes">✓</span></td>
+            <td style="text-align:center;"><span class="no">✗</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:10px 14px;font-size:13px;font-weight:400;">火災、爆炸、閃電、墜落物</td>
+            <td style="text-align:center;"><span class="yes">✓</span></td>
+            <td style="text-align:center;"><span class="yes">✓</span></td>
+            <td style="text-align:center;"><span class="no">✗</span></td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px;font-size:13px;font-weight:400;">不明刮傷、肇事逃逸</td>
+            <td style="text-align:center;"><span class="yes">✓</span></td>
+            <td style="text-align:center;"><span class="no">✗</span></td>
+            <td style="text-align:center;"><span class="no">✗</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip">
+      💡 理賠金有折舊，車齡越高扣越多。車被撞直接出險送修，後續求償由保險公司代位追討。
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- 意外險/醫療險 -->
+  <div class="card">
+    <div class="card-header bg-indigo">
+      <div class="card-emoji">🏥</div>
+      <div>
+        <div class="card-name c-indigo">意外險 + 醫療險（人身保險）</div>
+        <div class="card-desc">保自己這個人 ｜ 最快、最確定的理賠來源</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="row-label">
+          意外傷害醫療險
+          <small>住院、手術、急診費用</small>
+        </div>
+        <div class="row-val c-indigo">憑醫療單據<br>申請實支實付</div>
+      </div>
+      <div class="row">
+        <div class="row-label">
+          住院日額
+          <small>住院期間每日固定給付</small>
+        </div>
+        <div class="row-val c-indigo">日額 × 住院天數</div>
+      </div>
+      <div class="row">
+        <div class="row-label">
+          意外失能保險金
+          <small>車禍導致失能，依等級給付</small>
+        </div>
+        <div class="row-val c-indigo">保額 × 失能比例</div>
+      </div>
+      <div class="row">
+        <div class="row-label">需要等責任釐清才能申請？</div>
+        <div class="row-val c-green">不用<br>直接申請</div>
+      </div>
+    </div>
+    <div class="tip">
+      💡 不管對方有沒有保險、賠不賠得出來，自己的人身保障都能直接申請。這是最可靠的底氣。
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- 速查總表 -->
+  <div class="table-wrap">
+    <div class="table-title">📊 保障範圍速查表</div>
+    <table>
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>強制險</th>
+          <th>第三責</th>
+          <th>車體險</th>
+          <th>意外醫療</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>對方人員傷亡</td>
+          <td><span class="yes">✓</span></td>
+          <td><span class="yes">✓</span></td>
+          <td><span class="no">✗</span></td>
+          <td><span class="no">✗</span></td>
+        </tr>
+        <tr>
+          <td>對方車輛財損</td>
+          <td><span class="no">✗</span></td>
+          <td><span class="yes">✓</span></td>
+          <td><span class="no">✗</span></td>
+          <td><span class="no">✗</span></td>
+        </tr>
+        <tr>
+          <td>我方車輛損失</td>
+          <td><span class="no">✗</span></td>
+          <td><span class="no">✗</span></td>
+          <td><span class="yes">✓</span></td>
+          <td><span class="no">✗</span></td>
+        </tr>
+        <tr>
+          <td>我方駕駛受傷</td>
+          <td><span class="no">✗</span></td>
+          <td><span class="no">✗</span></td>
+          <td><span class="no">✗</span></td>
+          <td><span class="yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>我方乘客受傷</td>
+          <td><span class="yes">✓</span></td>
+          <td><span class="no">✗</span></td>
+          <td><span class="no">✗</span></td>
+          <td><span class="optional">乘客險</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p style="margin-top:28px;">by <a href="https://www.instagram.com/tony.insurance" target="_blank">@tony.insurance</a></p>
+    <p style="margin-top:6px;">資料來源：國泰產險、保險e聊站、金管會保險局｜僅供參考，實際理賠以保單條款為準</p>
+  </footer>
+
+</body>
+</html>
