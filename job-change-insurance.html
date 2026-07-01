@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>換工作了，你的意外險有跟著更新嗎？</title>
+  <style>
+    :root {
+      --blue:   #1D4ED8;
+      --indigo: #4F46E5;
+      --green:  #059669;
+      --red:    #DC2626;
+      --amber:  #B45309;
+      --gray:   #6B7280;
+      --border: #E5E7EB;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif;
+      background: #F3F4F6;
+      color: #111827;
+      padding: 32px 16px 64px;
+    }
+
+    /* ── 頁首 ── */
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .header .tag {
+      display: inline-block;
+      background: #EFF6FF;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: clamp(20px, 4vw, 28px);
+      font-weight: 800;
+      line-height: 1.35;
+    }
+    .header p {
+      margin-top: 10px;
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    /* ── 共用卡片 ── */
+    .card {
+      max-width: 640px;
+      margin: 0 auto 24px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 22px 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    }
+    .card-title {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-title .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── 哪些保單受影響 ── */
+    .affect-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .affect-item {
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+    .affect-item.yes {
+      background: #FEF2F2;
+      color: #B91C1C;
+      border: 1.5px solid #FECACA;
+    }
+    .affect-item.no {
+      background: #F0FDF4;
+      color: #065F46;
+      border: 1.5px solid #A7F3D0;
+    }
+    .affect-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .affect-note {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--gray);
+      margin-top: 3px;
+    }
+
+    /* ── 職業等級 ── */
+    .level-list { display: flex; flex-direction: column; gap: 8px; }
+    .level-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: #F9FAFB;
+      border: 1px solid var(--border);
+    }
+    .level-badge {
+      min-width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .level-text { font-size: 13px; }
+    .level-text strong { display: block; font-size: 13.5px; margin-bottom: 2px; }
+    .level-text span { font-size: 12px; color: var(--gray); }
+
+    .l1 { background: #DCFCE7; color: #15803D; }
+    .l2 { background: #D1FAE5; color: #065F46; }
+    .l3 { background: #FEF9C3; color: #854D0E; }
+    .l4 { background: #FEF3C7; color: #92400E; }
+    .l5 { background: #FED7AA; color: #9A3412; }
+    .l6 { background: #FECACA; color: #991B1B; }
+    .lx { background: #F3F4F6; color: #374151; }
+
+    /* ── 後果區塊 ── */
+    .consequence-box {
+      max-width: 640px;
+      margin: 0 auto 24px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    }
+    .consequence-header {
+      background: #1E3A5F;
+      padding: 14px 20px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .consequence-item {
+      background: #fff;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .consequence-item:last-child { border-bottom: none; }
+    .consequence-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+    .consequence-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #DC2626;
+      margin-bottom: 10px;
+    }
+    .consequence-desc {
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.7;
+    }
+    .formula-box {
+      background: #FEF2F2;
+      border: 1.5px solid #FECACA;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-top: 10px;
+      font-size: 13px;
+      color: #991B1B;
+      font-weight: 600;
+      text-align: center;
+    }
+    .formula-example {
+      font-size: 12px;
+      color: var(--gray);
+      font-weight: 400;
+      margin-top: 6px;
+    }
+
+    /* ── 通知清單 ── */
+    .checklist-card {
+      max-width: 640px;
+      margin: 0 auto 24px;
+      background: #F0FDF4;
+      border: 1.5px solid #A7F3D0;
+      border-radius: 20px;
+      padding: 22px 24px;
+    }
+    .checklist-card h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: #065F46;
+      margin-bottom: 16px;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .check-item:last-child { margin-bottom: 0; }
+    .check-box {
+      width: 22px; height: 22px;
+      border: 2px solid #34D399;
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .check-label {
+      font-size: 13.5px;
+      color: #374151;
+      line-height: 1.6;
+    }
+    .check-label strong { color: #065F46; }
+
+    /* ── 提醒 ── */
+    .tip-card {
+      max-width: 640px;
+      margin: 0 auto 24px;
+      background: #FFFBEB;
+      border: 1.5px solid #FDE68A;
+      border-radius: 16px;
+      padding: 18px 20px;
+    }
+    .tip-card p {
+      font-size: 13px;
+      color: #92400E;
+      line-height: 1.7;
+    }
+    .tip-card strong { color: #78350F; }
+
+    footer {
+      text-align: center;
+      margin-top: 28px;
+      font-size: 11.5px;
+      color: #9CA3AF;
+    }
+
+    @media (max-width: 480px) {
+      .affect-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="tag">壽險｜意外險（傷害險）</div>
+    <h1>換工作了，<br>你的意外險有跟著更新嗎？</h1>
+    <p>換工作沒通知保險公司，理賠可能被打折</p>
+  </div>
+
+  <!-- 哪些保單受影響 -->
+  <div class="card">
+    <div class="card-title">
+      <div class="dot" style="background:#DC2626;"></div>
+      先搞清楚：哪些保單受職業等級影響？
+    </div>
+    <div class="affect-grid">
+      <div class="affect-item yes">
+        <div class="affect-icon">⚠️</div>
+        <div>
+          <div>意外險</div>
+          <div class="affect-note">傷害險、意外傷害險</div>
+          <div class="affect-note" style="color:#DC2626;font-weight:700;">✗ 受影響</div>
+        </div>
+      </div>
+      <div class="affect-item no">
+        <div class="affect-icon">✓</div>
+        <div>
+          <div>壽險</div>
+          <div class="affect-note">定期壽險、終身壽險</div>
+          <div class="affect-note" style="color:#059669;font-weight:700;">不受影響</div>
+        </div>
+      </div>
+      <div class="affect-item no">
+        <div class="affect-icon">✓</div>
+        <div>
+          <div>醫療險</div>
+          <div class="affect-note">實支實付、住院日額</div>
+          <div class="affect-note" style="color:#059669;font-weight:700;">不受影響</div>
+        </div>
+      </div>
+      <div class="affect-item no">
+        <div class="affect-icon">✓</div>
+        <div>
+          <div>重大傷病險</div>
+          <div class="affect-note">癌症險、重疾險</div>
+          <div class="affect-note" style="color:#059669;font-weight:700;">不受影響</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 職業等級 -->
+  <div class="card">
+    <div class="card-title">
+      <div class="dot" style="background:#4F46E5;"></div>
+      意外險的職業等級怎麼分？
+    </div>
+    <div class="level-list">
+      <div class="level-item">
+        <div class="level-badge l1">1 級</div>
+        <div class="level-text">
+          <strong>風險最低</strong>
+          <span>一般辦公室、內勤行政、教師</span>
+        </div>
+      </div>
+      <div class="level-item">
+        <div class="level-badge l2">2 級</div>
+        <div class="level-text">
+          <strong>低度風險</strong>
+          <span>業務外出、輕度體力工作、零售業</span>
+        </div>
+      </div>
+      <div class="level-item">
+        <div class="level-badge l3">3 級</div>
+        <div class="level-text">
+          <strong>中度風險</strong>
+          <span>駕駛員、餐飲廚房、外送員</span>
+        </div>
+      </div>
+      <div class="level-item">
+        <div class="level-badge l4">4 級</div>
+        <div class="level-text">
+          <strong>中高度風險</strong>
+          <span>工地作業員、搬運工、漁業</span>
+        </div>
+      </div>
+      <div class="level-item">
+        <div class="level-badge l5">5 級</div>
+        <div class="level-text">
+          <strong>高度風險</strong>
+          <span>高空作業、潛水員、爆破作業</span>
+        </div>
+      </div>
+      <div class="level-item">
+        <div class="level-badge l6">6 級</div>
+        <div class="level-text">
+          <strong>最高風險</strong>
+          <span>特殊高危職業，保費最貴</span>
+        </div>
+      </div>
+      <div class="level-item">
+        <div class="level-badge lx" style="font-size:10px;">拒保</div>
+        <div class="level-text">
+          <strong>拒保職業</strong>
+          <span>超過 6 級，保險公司不承保意外險</span>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:11.5px;color:#9CA3AF;margin-top:12px;">※ 實際職業分類以各保險公司「台灣地區傷害保險個人職業分類表」為準</p>
+  </div>
+
+  <!-- 後果 -->
+  <div class="consequence-box">
+    <div class="consequence-header">沒通知會怎樣？兩種後果</div>
+    <div class="consequence-item">
+      <div class="consequence-label">情況 A｜換到高風險職業，沒通知</div>
+      <div class="consequence-title">理賠金按比例打折</div>
+      <div class="consequence-desc">
+        保險公司會用「你實際繳的保費 ÷ 應該繳的保費」計算比例，<br>
+        再乘上你的理賠金額。
+      </div>
+      <div class="formula-box">
+        理賠金 = 原本理賠金額 × （實際保費 ÷ 應繳保費）
+        <div class="formula-example">例：原本賠 100 萬，差兩倍 → 實際只賠 50 萬</div>
+        <div class="formula-example">身故、失能、實支實付、住院日額，全部打折</div>
+      </div>
+    </div>
+    <div class="consequence-item">
+      <div class="consequence-label">情況 B｜換到拒保職業，沒通知</div>
+      <div class="consequence-title">直接拒賠，保費照收</div>
+      <div class="consequence-desc">
+        新職業屬於拒保職業卻未通知，出事後保險公司直接拒絕理賠。<br>
+        保費一樣已繳出去，無法退還。
+      </div>
+    </div>
+  </div>
+
+  <!-- 通知清單 -->
+  <div class="checklist-card">
+    <h3>換工作後，記得做這幾件事</h3>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-label">換工作後<strong>盡快聯絡保險業務員</strong>，越快越好</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-label">在多家公司都有保意外險，<strong>每家都要分別通知</strong>，不能只通知一家</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-label">換到低風險工作也要通知，<strong>可申請調降保費</strong>，保險公司不會主動退</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-label">完成職業變更手續後，<strong>索取書面確認</strong>，留存紀錄</div>
+    </div>
+  </div>
+
+  <!-- 提醒 -->
+  <div class="tip-card">
+    <p>💡 <strong>提醒：</strong>意外險的保費不看年齡、不看性別，<strong>只看你的職業危險程度</strong>。換工作對意外險的影響，比很多人以為的還要大，千萬別忘了通知。</p>
+  </div>
+
+  <footer>
+    <p>by <a href="https://www.instagram.com/tony.insurance" target="_blank">@tony.insurance</a></p>
+    <p style="margin-top:6px;">資料來源：保險法第 57 條、台灣地區傷害保險個人職業分類表｜僅供參考，實際理賠以保單條款為準</p>
+  </footer>
+
+</body>
+</html>
